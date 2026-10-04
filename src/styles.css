@@ -472,6 +472,7 @@ summary {
   text-align: left;
 }
 .relogio-hora {
+  height: 0.94em;
   font-family: var(--f-display);
   font-size: clamp(4.5rem, 2rem + 6.5vw, 8rem);
   line-height: 0.9;
@@ -490,8 +491,9 @@ summary {
   display: inline-block;
 }
 .linha-dia {
+  --linha-w: clamp(220px, 22vw, 300px);
   position: relative;
-  width: clamp(220px, 22vw, 300px);
+  width: var(--linha-w);
   height: 34px;
   margin-top: 0.4rem;
 }
@@ -502,6 +504,7 @@ summary {
   top: 7px;
   height: 1px;
   background: rgba(237, 228, 214, 0.45);
+  transform-origin: left;
 }
 .linha-marca {
   position: absolute;
@@ -513,7 +516,7 @@ summary {
   border-radius: 50%;
   background: var(--brasa);
   box-shadow: 0 0 0 4px rgba(217, 119, 74, 0.22);
-  transform: translateX(calc(var(--pos, 0.1667) * clamp(220px, 22vw, 300px)));
+  transform: translateX(calc(var(--pos, 0.1667) * var(--linha-w)));
   transition: transform 1.1s var(--ease);
 }
 .linha-rot {
@@ -705,14 +708,15 @@ summary {
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
-.hora-mascara {
+.hora-placas {
   display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
   padding-top: 0.06em;
+  white-space: nowrap;
 }
-.hora-txt {
+.placa,
+.placa-sep {
   display: inline-block;
+  backface-visibility: hidden;
 }
 .quadro-nome {
   font-weight: 500;
@@ -774,6 +778,7 @@ summary {
   flex: 1;
   background: currentColor;
   transform-origin: left;
+  transform: scaleX(var(--agora, 1));
 }
 .quadro-folga {
   display: grid;
@@ -1647,6 +1652,14 @@ summary {
   .js.pronto .relogio {
     animation: none;
   }
+  /* o título só aparece depois de dividido em letras (aparecer não conta como CLS; mudar depois, sim) */
+  .js .hero-h1 {
+    visibility: hidden;
+    animation: aparece-vis 0s 3s forwards;
+  }
+  .js.pronto .hero-h1 {
+    animation: none;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -1654,6 +1667,11 @@ summary {
   *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+  }
+}
+@keyframes aparece-vis {
+  to {
+    visibility: visible;
   }
 }
 @keyframes aparece {
@@ -1703,5 +1721,654 @@ summary {
 @media (max-aspect-ratio: 4/5), (max-width: 640px) {
   .linha-rot {
     color: var(--papel);
+  }
+}
+
+/* ==========================================================================
+   MOTION · camadas e microinterações (passe de motion design)
+   O visual continua contido; o movimento carrega o conceito: brasa, luz do
+   forno, farinha no ar, massa que cresce, o dia amanhecendo.
+   Só transform e opacity no que roda em loop; canvas pausado fora da tela.
+   ========================================================================== */
+
+/* máscaras de linha do SplitText: margem de recorte para o brilho e os acentos */
+.linha-mask {
+  overflow-clip-margin: 0.3em;
+}
+
+.hero-sombra {
+  position: absolute;
+  inset: 0;
+  background: var(--preto);
+  opacity: 0;
+  pointer-events: none;
+}
+.hero-brasas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* dígitos que rolam (relógio, preços) */
+.dg {
+  display: inline-block;
+  position: relative;
+  clip-path: inset(-0.12em -0.2em);
+}
+.dg-fita {
+  display: block;
+  position: relative;
+}
+.dg-fita > span {
+  display: block;
+}
+.dg-fita > .dg-prox {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+/* no relógio cada dígito tem largura fixa: a placa não muda de tamanho quando vira */
+.relogio-hora .dg {
+  width: 0.6em;
+  text-align: center;
+}
+
+/* marcador da linha do tempo: um sinal a cada cena */
+.linha-marca::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid var(--brasa);
+  opacity: 0;
+}
+.linha-marca.pulsa::after {
+  animation: ping 1.5s var(--ease);
+}
+
+/* fotos: bafo de luz quente quando a porta do forno abre */
+.calor {
+  position: absolute;
+  inset: -35% 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 170, 100, 0) 0%,
+    rgba(255, 150, 80, 0.5) 40%,
+    rgba(255, 216, 168, 0.62) 50%,
+    rgba(255, 150, 80, 0.42) 60%,
+    rgba(255, 170, 100, 0) 100%
+  );
+}
+
+/* quadro: linha sublinhada por um fio de brasa no hover */
+.quadro-linha {
+  position: relative;
+}
+.quadro-linha::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--brasa), #ffc58f);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.7s var(--ease);
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .quadro-linha:hover::after {
+    transform: scaleX(1);
+  }
+  .avise:hover {
+    box-shadow: 0 0 22px rgba(217, 119, 74, 0.35);
+  }
+}
+.quadro-linha.forno {
+  isolation: isolate;
+}
+.quadro-linha.forno::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 42% 120% at 10% 50%, rgba(217, 119, 74, 0.16), rgba(217, 119, 74, 0) 70%);
+}
+.quadro-linha.forno .estado-marca,
+.proxima-marca,
+.status-marca {
+  position: relative;
+}
+.quadro-linha.forno .estado-marca::after,
+.proxima-marca::after,
+.status-loja.aberto .status-marca::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217, 119, 74, 0.6), rgba(217, 119, 74, 0) 70%);
+  opacity: 0.4;
+  pointer-events: none;
+}
+.status-loja.aberto .status-marca::after {
+  background: radial-gradient(circle, rgba(151, 63, 27, 0.45), rgba(151, 63, 27, 0) 70%);
+}
+
+/* processo: varredura de luz do amanhecer, farinha, brasa na régua */
+.processo-pino {
+  overflow: clip;
+}
+.processo-luz {
+  position: absolute;
+  inset: 0 -30%;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  background: linear-gradient(
+    100deg,
+    rgba(255, 184, 120, 0) 25%,
+    rgba(255, 184, 120, 0.2) 42%,
+    rgba(255, 226, 190, 0.3) 50%,
+    rgba(255, 184, 120, 0.2) 58%,
+    rgba(255, 184, 120, 0) 75%
+  );
+}
+.processo-farinha {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: block;
+  width: 100%;
+  height: 100svh;
+  margin-bottom: -100svh;
+  pointer-events: none;
+}
+.processo-brasa {
+  position: absolute;
+  left: -5px;
+  top: -4px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--brasa);
+  box-shadow: 0 0 14px 3px rgba(217, 119, 74, 0.55);
+}
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .js .processo-farinha {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    margin: 0;
+  }
+}
+
+/* cardápio: porta de enrolar (ripas café-preto, fio de brasa na barra) */
+.porta-forno {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: repeating-linear-gradient(180deg, #1d1712 0 22px, #120e0b 22px 23px, #2a1e17 23px 24px);
+}
+.porta-forno::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--brasa);
+  box-shadow: 0 0 16px 2px rgba(217, 119, 74, 0.6);
+}
+.item-pontos {
+  position: relative;
+}
+.item-pontos::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--brasa-funda);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.7s var(--ease);
+}
+.itens li.ativo .item-pontos::after {
+  transform: scaleX(1);
+}
+.abas-traco {
+  top: 0;
+  bottom: auto;
+}
+
+/* depoimentos: o contador rola */
+.citacoes-contador {
+  overflow: hidden;
+}
+[data-atual] {
+  display: inline-block;
+}
+.seta .ico {
+  transition: transform 0.35s var(--ease);
+}
+.seta[data-proximo]:hover .ico {
+  transform: translateX(3px);
+}
+.seta[data-anterior]:hover .ico {
+  transform: translateX(-3px);
+}
+
+/* visite: fio de brasa sob o dia de hoje; endereço pendurado */
+.horarios div {
+  position: relative;
+}
+.horarios div.hoje::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--brasa-funda);
+  transform: scaleX(var(--fio, 1));
+  transform-origin: left;
+}
+.endereco-rua {
+  justify-self: start;
+}
+
+/* rodapé: o letreiro acende como brasa */
+.rodape-letreiro {
+  position: relative;
+}
+.rodape-letreiro > [data-rodape-letreiro] {
+  position: relative;
+  z-index: 1;
+}
+.rodape-brilho {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  color: var(--brasa);
+  filter: blur(clamp(16px, 3vw, 44px));
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
+}
+.rodape-brilho span {
+  display: inline-block;
+}
+
+/* botões grandes: reflexo que segue o cursor e brilho de brasa */
+.btn-grande {
+  position: relative;
+  isolation: isolate;
+}
+.btn-grande::before,
+.btn-brasa.btn-grande::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.btn-grande::before {
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 240, 222, var(--reflexo, 0.4)), rgba(255, 240, 222, 0) 62%);
+}
+.btn-linha.btn-grande {
+  --reflexo: 0.16;
+}
+.btn-brasa.btn-grande::after {
+  box-shadow: 0 0 30px 2px rgba(217, 119, 74, 0.5);
+}
+
+/* links: uma faísca corre pelo fio */
+.link {
+  position: relative;
+}
+.topo-nav a::before,
+.link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+  background: radial-gradient(closest-side, #fff0dc, rgba(255, 170, 110, 0.75) 45%, rgba(255, 170, 110, 0)) right center / 14px 100% no-repeat;
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+.link::before {
+  bottom: 0;
+}
+
+/* lamparina: luz quente que segue o cursor nas seções escuras */
+.lamparina {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 80;
+  width: 640px;
+  height: 640px;
+  margin: -320px 0 0 -320px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  background: radial-gradient(
+    circle,
+    rgba(255, 176, 112, 0.17) 0%,
+    rgba(217, 119, 74, 0.09) 30%,
+    rgba(217, 119, 74, 0.03) 52%,
+    rgba(217, 119, 74, 0) 70%
+  );
+  will-change: transform, opacity;
+}
+.lamparina::after {
+  content: '';
+  position: absolute;
+  inset: 30%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 200, 140, 0.12), rgba(255, 200, 140, 0) 70%);
+}
+
+/* tudo que pulsa em loop só existe com movimento liberado */
+@media (prefers-reduced-motion: no-preference) {
+  .quadro-linha.forno::before {
+    animation: brasa-luz 3.2s ease-in-out infinite;
+  }
+  .quadro-linha.forno .estado-marca::after,
+  .proxima-marca::after,
+  .status-loja.aberto .status-marca::after {
+    animation: brasa 2.6s ease-in-out infinite;
+  }
+  .lamparina::after {
+    animation: chama 3.4s ease-in-out infinite;
+  }
+  .topo-nav a:hover::before,
+  .link:hover::before {
+    animation: faisca 0.9s var(--ease) forwards;
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .itens li:hover .item-pontos::after {
+    transform: scaleX(1);
+  }
+  .btn-grande:hover::before,
+  .btn-brasa.btn-grande:hover::after {
+    opacity: 1;
+  }
+}
+@keyframes ping {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+@keyframes brasa {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+  52% {
+    opacity: 0.55;
+    transform: scale(1.05);
+  }
+  70% {
+    opacity: 0.9;
+    transform: scale(1.15);
+  }
+}
+@keyframes brasa-luz {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  30% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 0.7;
+  }
+  65% {
+    opacity: 0.95;
+  }
+}
+@keyframes chama {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  50% {
+    opacity: 0.75;
+  }
+  70% {
+    opacity: 0.95;
+    transform: scale(0.97);
+  }
+}
+@keyframes faisca {
+  0% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+  55% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   CELULAR (≤ 600 px): tudo centrado, menos tabelas e listas
+   (linhas do quadro, itens do cardápio e horários seguem à esquerda)
+   ========================================================================== */
+@media (max-width: 600px) {
+  /* hero */
+  .relogio {
+    justify-self: center;
+    justify-items: center;
+    text-align: center;
+  }
+  .linha-dia {
+    --linha-w: min(72vw, 270px);
+  }
+  .relogio-hora,
+  .relogio-legenda {
+    justify-self: stretch;
+  }
+  .linha-rot {
+    transform: translateX(-50%);
+  }
+  .hero-texto {
+    justify-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: none;
+  }
+  .hero-h1,
+  .hero-sub {
+    margin-inline: auto;
+  }
+  .hero-acoes {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+  .hero-acoes .btn-grande {
+    justify-content: center;
+  }
+  .hero-pe {
+    justify-content: center;
+  }
+  .pausa {
+    padding: 0.5rem 0.85rem;
+  }
+  .pausa .pausa-txt {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+  }
+
+  /* cabeças de seção */
+  .fornadas-cabeca,
+  .processo-cabeca,
+  .nordeste-cabeca {
+    justify-items: center;
+    text-align: center;
+  }
+  .nordeste-cabeca {
+    margin-inline: auto;
+  }
+  .fornadas-cabeca .texto,
+  .nordeste-cabeca .texto,
+  .processo-nota {
+    margin-inline: auto;
+  }
+  .legenda {
+    justify-content: center;
+  }
+  .nd-numero {
+    justify-items: center;
+    text-align: center;
+  }
+  .nd-numero p,
+  .nd .nd-frase {
+    margin-inline: auto;
+  }
+
+  /* cardápio: título e abas no centro; as abas quebram em duas linhas em vez de cortar */
+  .cardapio-lista > .titulo,
+  .cardapio-lista > .texto {
+    justify-self: center;
+    text-align: center;
+  }
+  .abas {
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 1.35rem;
+    row-gap: 0;
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+    padding-right: 0;
+  }
+  .nota-brunch {
+    text-align: center;
+  }
+
+  /* depoimentos */
+  .vizinhos-grade,
+  .citacoes,
+  .citacao {
+    justify-items: center;
+    text-align: center;
+  }
+  .citacao blockquote p {
+    margin-inline: auto;
+  }
+  .citacoes-controles {
+    justify-content: center;
+  }
+
+  /* visite */
+  .visite-texto {
+    justify-items: center;
+    text-align: center;
+  }
+  .status-loja {
+    justify-self: center;
+  }
+  .horarios {
+    justify-self: stretch;
+    text-align: left;
+  }
+  .visite-acoes {
+    justify-self: stretch;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .visite-acoes .btn-grande {
+    justify-content: center;
+  }
+  .visite-acoes .link {
+    align-self: center;
+  }
+  .endereco {
+    justify-self: stretch;
+    justify-items: center;
+    text-align: center;
+  }
+  .endereco-rua {
+    justify-self: center;
+  }
+
+  /* rodapé */
+  .rodape-grade {
+    justify-items: center;
+    text-align: center;
+  }
+  .rodape-conceito,
+  .creditos p {
+    margin-inline: auto;
+  }
+}
+
+/* celular: nenhum texto corrido encostado à esquerda (tabelas à parte) */
+@media (max-width: 600px) {
+  .etapa-texto,
+  .nd figcaption,
+  .nd-abre figcaption {
+    justify-items: center;
+    text-align: center;
+  }
+  .etapa-hora {
+    justify-content: center;
+  }
+  .etapa-texto p:last-child,
+  .nd p,
+  .nd-abre h3 {
+    margin-inline: auto;
+  }
+  .rodape-letreiro {
+    font-size: 31vw;
   }
 }

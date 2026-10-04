@@ -112,6 +112,8 @@ Paleta tirada da própria comida e do forno: café, casca, farinha e brasa.
 **The One Ember Rule.** A brasa é o único acento da página. Não entra uma segunda cor de destaque.
 **The Daybreak Rule.** O fundo só muda de noite para dia uma vez, no processo, e por motivo narrativo. Fora dele, as seções alternam só entre tons da mesma fase do dia.
 
+**The Restrained Look, Lively Motion Rule.** Paleta, tipografia e layout são contidos; o movimento é generoso e conceitual. Brilho de brasa no movimento usa só a própria brasa (#D9774A e seus tons quentes), nunca uma cor nova.
+
 ## Typography
 
 **Display Font:** Libre Caslon Display (fallback Iowan Old Style, Palatino, Georgia)
@@ -156,7 +158,8 @@ Raio de 2 px em botões e fotos, 0 nas fotos que sangram até a borda e círculo
 ### Do:
 - **Do** mostrar comida grande e sem moldura, sempre com o mesmo tratamento quente (`scripts/otimizar-imagens.mjs`).
 - **Do** usar um elemento dominante por seção (relógio, quadro, contador, foto larga, citação, logo do rodapé).
-- **Do** animar entradas com desaceleração longa (`expo.out`, 1,1–1,4 s): linhas atrás de máscara, fotos abrindo em clip-path.
+- **Do** animar entradas com desaceleração longa (`expo.out`, 1,1–1,4 s) e deixar o movimento expressivo: a contenção vale para o visual, não para o motion. Cada animação fala do forno: letras que chegam em brasa e esfriam, placas mecânicas que viram, a porta do forno que abre com um bafo de luz, fagulhas que sobem, farinha que cai, massa que cresce, a luz que varre o amanhecer, a lamparina que segue o cursor no escuro.
+- **Do** manter o motion barato: só `transform`/`opacity` no que roda em loop, canvas com sprites e pausado fora da tela, nada que mexa no layout depois do primeiro desenho (CLS 0).
 - **Do** respeitar `prefers-reduced-motion`: sem Lenis, sem pino, vídeo parado no pôster.
 
 ### Don't:

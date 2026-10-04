@@ -43,14 +43,22 @@ As imagens do hero, do processo, do Nordeste e da Visite foram geradas por IA (C
 
 ## Motion design
 
-O movimento acompanha a história: luz de forno, farinha no ar e o dia nascendo. Na página há, entre outros:
-- títulos que entram linha a linha;
-- relógio com dígitos rolando;
-- fotos que se abrem como uma janela;
-- rolagem horizontal fixa no processo;
-- marquee que reage à velocidade da rolagem;
-- placa da padaria que balança ao aparecer;
-- botões que seguem o cursor.
+O movimento conta a história com três elementos: a luz do forno, a farinha no ar e o dia nascendo.
+
+- **Hero:**
+  - o título acende letra a letra em brasa e depois esfria até a cor do papel;
+  - o relógio gira como uma placa mecânica a cada cena do vídeo;
+  - fagulhas sobem por cima do vídeo e aceleram com a rolagem;
+  - ao rolar, o hero recua em camadas.
+- **Lamparina:** nas seções escuras, uma luz quente segue o cursor.
+- **Quadro de fornadas:** as plaquinhas de horário viram em 3D, dígito a dígito, em cascata. O item que está no forno pulsa como brasa.
+- **Fotos:** abrem como a porta do forno, com um bafo de luz quente.
+- **36 horas para um pão:** rolagem horizontal com profundidade. A massa cresce, a farinha cai, as horas contam e o dia amanhece.
+- **Cardápio:**
+  - uma porta de enrolar troca a foto do item;
+  - os preços rolam como numa caixa registradora.
+- **Faixa de ingredientes:** acelera, inverte e inclina conforme a velocidade da rolagem.
+- **Rodapé:** o nome "Sereno" acende como brasa quando aparece.
 
 Quem prefere menos movimento (`prefers-reduced-motion`) vê uma versão calma e completa: sem rolagem suave e sem pino, com o vídeo parado e um botão para tocar.
 
@@ -58,14 +66,14 @@ Quem prefere menos movimento (`prefers-reduced-motion`) vê uma versão calma e 
 
 | Lighthouse | Performance | Acessibilidade | Boas práticas | SEO |
 |---|---|---|---|---|
-| Celular | 98 | 100 | 100 | 100 |
+| Celular | 97 | 100 | 100 | 100 |
 | Desktop | 100 | 100 | 100 | 100 |
 
 Imagens em AVIF e WebP em 5 tamanhos e fontes servidas pelo próprio site. O CLS é zero e o vídeo sempre tem botão de pausar.
 
 ## Tecnologias
 
-HTML, CSS e JavaScript · [GSAP](https://gsap.com) (ScrollTrigger e SplitText) · [Lenis](https://lenis.darkroom.engineering) · [HyperFrames](https://github.com/heygen-com/hyperframes) para o vídeo · [Vite](https://vite.dev) · imagens por IA (ChatGPT, Google Flow/Veo) · hospedagem na Vercel.
+HTML, CSS e JavaScript · [GSAP](https://gsap.com) (ScrollTrigger e SplitText) · [Lenis](https://lenis.darkroom.engineering) · [HyperFrames](https://github.com/heygen-com/hyperframes) para o vídeo · Canvas (partículas) · [Vite](https://vite.dev) · imagens por IA (ChatGPT, Google Flow/Veo) · hospedagem na Vercel.
 
 ## Rodar localmente
 

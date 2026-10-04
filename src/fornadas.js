@@ -104,7 +104,7 @@ export function renderizarQuadro(lista, diaEl) {
       : `<a class="avise" href="${WA}${pedido}" target="_blank" rel="noopener" aria-label="Me avise quando sair: ${nome}, ${fala(t)}">Me avise</a>`;
     linhas.push(
       `<li class="quadro-linha ${e.cls}">` +
-        `<span class="quadro-hora"><span class="sr">${fala(t)}</span><span aria-hidden="true" class="hora-mascara"><span class="hora-txt">${hhmm}</span></span></span>` +
+        `<span class="quadro-hora"><span class="sr">${fala(t)}</span><span aria-hidden="true" class="hora-placas">${[...hhmm].map((c) => (c === ':' ? '<span class="placa-sep">:</span>' : `<span class="placa">${c}</span>`)).join('')}</span></span>` +
         `<span class="quadro-nome">${nome}${detalhe ? `<small>${detalhe}</small>` : ''}</span>` +
         `<span class="quadro-estado">${marcaEstado(e.cls)}${e.txt}</span></span>` +
         `<span class="quadro-acao">${acao}</span>` +

@@ -66,7 +66,17 @@ async function rolar(px, passo = 110, intervalo = 55) {
   }
 }
 
-await espera(4200); // abertura: letreiro pintado + porta da vitrine
+await espera(3600); // abertura: letras em brasa, relógio dando partida, fagulhas
+if (modo === 'desktop') {
+  // a lamparina segue o cursor e o botão principal puxa o ponteiro (magnético, com reflexo)
+  for (const [x, y] of [[620, 420], [900, 300], [700, 520], [400, 640], [190, 745], [215, 750], [250, 742], [420, 748]]) {
+    await page.mouse.move(x, y, { steps: 14 });
+    await espera(260);
+  }
+  await espera(900);
+  await page.mouse.move(width / 2, height / 2, { steps: 12 });
+}
+await espera(600);
 await rolarAte('#fornadas', -10);
 await espera(2400); // plaquinhas viram
 await rolar(modo === 'mobile' ? 1500 : 600);

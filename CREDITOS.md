@@ -50,6 +50,10 @@ Baixadas mas fora desta versão (usadas na v1, trocadas por imagens próprias ou
 
 Os dois vídeos do hero (`public/video/madrugada-16x9.*` e `madrugada-9x16.*`) foram montados com **HyperFrames** (HTML + GSAP renderizado em MP4) a partir das imagens de IA hero-cestos, hero-forno e hero-fornada e do trecho do vídeo do Google Flow na cena do forno, com poeira de farinha gerada por código (semente fixa) e fusões de brasa. Código em `video/`.
 
+## Partículas e luzes
+
+Fagulhas do hero, farinha do processo, lamparina do cursor, bafo de luz das fotos e porta de enrolar do cardápio são desenhados por código (canvas e CSS, `src/particulas.js` e `src/styles.css`), sem imagens de terceiros.
+
 ## Fontes (SIL Open Font License 1.1)
 
 - **Libre Caslon Display**, de Impallari Type (Google Fonts), servida de `public/fonts/`.

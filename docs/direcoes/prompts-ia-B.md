@@ -1,6 +1,6 @@
 # Prompts de imagem e vídeo por IA · direção B (Madrugada)
 
-Para o George rodar nas contas dele (ChatGPT para imagens; Gemini e Google Flow/Veo para imagem e vídeo). Esta versão da página usa fotos do Unsplash com o mesmo tratamento quente; ao trocar por imagens próprias, salve em `assets-src/ia/` com os nomes abaixo, rode `npm run imagens` e troque o nome na tag `<foto nome="...">` do `index.html` (ou mantenha o mesmo nome do arquivo para trocar sem mexer no código).
+Prompts usados para gerar as imagens e o vídeo (ChatGPT para imagens; Google Flow/Veo para vídeo). Esta versão da página usa fotos do Unsplash com o mesmo tratamento quente; ao trocar por imagens próprias, salve em `assets-src/ia/` com os nomes abaixo, rode `npm run imagens` e troque o nome na tag `<foto nome="...">` do `index.html` (ou mantenha o mesmo nome do arquivo para trocar sem mexer no código).
 
 ## Base comum (cole no início de todos)
 

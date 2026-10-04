@@ -2,7 +2,7 @@
 
 ## Imagens geradas por IA (ilustrações, não são fotos reais)
 
-Geradas em 03/10/2026 no **ChatGPT** do George, a partir dos prompts de `docs/direcoes/prompts-ia-B.md` (direção B: clave baixa, luz quente da esquerda, paleta café-preto/papel/farinha/brasa). Não mostram a padaria nem produtos reais; na página, o rodapé avisa que algumas imagens são ilustrações geradas por IA. Originais em `assets-src/ia/` (fora do git); `npm run imagens` gera as versões web com o prefixo `ia-`.
+Geradas em 03/10/2026 no **ChatGPT**, a partir dos prompts de `docs/direcoes/prompts-ia-B.md` (direção B: clave baixa, luz quente da esquerda, paleta café-preto/papel/farinha/brasa). Não mostram a padaria nem produtos reais; na página, o rodapé avisa que algumas imagens são ilustrações geradas por IA. Originais em `assets-src/ia/` (fora do git); `npm run imagens` gera as versões web com o prefixo `ia-`.
 
 | Arquivo | Onde aparece |
 |---|---|
@@ -21,7 +21,7 @@ No vídeo 16:9 as três imagens do hero foram espelhadas na horizontal para o pr
 
 ## Vídeo gerado por IA (Google Flow / Veo 3.1 Fast)
 
-`assets-src/ia/video/flow-forno-16x9.mp4` (8 s, 1920×1080), gerado no Google Flow do George a partir de hero-forno-16x9: empurrão lento, brasas e fagulhas vivas. Na composição do hero entra só o trecho de 0 a 3,7 s (antes de o braço com a pá aparecer), **sem áudio**, em fusão sobre a cena 04:30; no 16:9 espelhado como as imagens, no 9:16 recortado no arco do forno. É uma ilustração gerada por IA, não filmagem real.
+`assets-src/ia/video/flow-forno-16x9.mp4` (8 s, 1920×1080), gerado no Google Flow a partir de hero-forno-16x9: empurrão lento, brasas e fagulhas vivas. Na composição do hero entra só o trecho de 0 a 3,7 s (antes de o braço com a pá aparecer), **sem áudio**, em fusão sobre a cena 04:30; no 16:9 espelhado como as imagens, no 9:16 recortado no arco do forno. É uma ilustração gerada por IA, não filmagem real.
 
 ## Fotos de banco
 

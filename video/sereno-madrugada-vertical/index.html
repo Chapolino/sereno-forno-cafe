@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Sereno · madrugada (vertical)</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root { --preto: #14100d; --brasa: #d9774a; --papel: #ede4d6; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--preto); }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--preto); }
+      .cena { position: absolute; inset: 0; overflow: hidden; z-index: 1; }
+      .camadas { position: absolute; inset: 0; overflow: hidden; z-index: 3; pointer-events: none; }
+      #forno-vivo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; opacity: 0; }
+      .foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+      #f1 { object-position: 50% 50%; }
+      #f2 { object-position: 38% 50%; }
+      #f3 { object-position: 42% 60%; }
+      #f4 { object-position: 50% 50%; }
+      #f1 { opacity: 1; }
+      .vinheta {
+        position: absolute; inset: 0; pointer-events: none;
+        background: radial-gradient(ellipse 75% 70% at 50% 50%, rgba(20, 16, 13, 0) 45%, rgba(20, 16, 13, 0.62) 100%);
+      }
+      .luz {
+        position: absolute; inset: 0; pointer-events: none; opacity: 0; mix-blend-mode: screen;
+        background: radial-gradient(ellipse 60% 55% at 70% 40%, rgba(217, 119, 74, 0.55), rgba(217, 119, 74, 0) 70%);
+      }
+      .poeira { position: absolute; inset: 0; pointer-events: none; }
+      .p { position: absolute; left: 0; top: 0; border-radius: 50%; background: #f3e6cf; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="9" data-width="1080" data-height="1920">
+      <div id="cena" class="clip cena" data-start="0" data-duration="9" data-track-index="0">
+        <img class="foto" id="f1" src="assets/cestos.jpg" alt="" />
+        <img class="foto" id="f2" src="assets/fogo.jpg" alt="" />
+        <img class="foto" id="f3" src="assets/croissant-farinha.jpg" alt="" />
+        <img class="foto" id="f4" src="assets/cestos-loop.jpg" alt="" />
+      </div>
+      <video id="forno-vivo" src="assets/forno-vivo.mp4" data-start="2.7" data-duration="3.6" data-media-start="0" data-track-index="1" muted playsinline></video>
+      <div id="camadas" class="clip camadas" data-start="0" data-duration="9" data-track-index="2">
+        <div class="luz" id="luz"></div>
+        <div class="poeira" id="poeira" data-layout-ignore></div>
+        <div class="vinheta"></div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const W = 1080, H = 1920, T = 9;
+
+      // PRNG com semente (mulberry32): a poeira é sempre igual em todo render
+      function mulberry32(a) { return function () { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+      const rnd = mulberry32(2026);
+      const poeira = document.getElementById('poeira');
+      const N = 60;
+      for (let i = 0; i < N; i++) {
+        const d = document.createElement('div');
+        d.className = 'p';
+        const s = 1.2 + rnd() * 3.2;
+        d.style.width = d.style.height = s + 'px';
+        d.style.opacity = (0.12 + rnd() * 0.5).toFixed(2);
+        if (rnd() < 0.35) d.style.filter = 'blur(' + (1 + rnd() * 2).toFixed(1) + 'px)';
+        poeira.appendChild(d);
+        const x0 = rnd() * W;
+        const y0 = rnd() * (H + 40) - 20;
+        // sobe exatamente uma altura inteira em 9 s e "dá a volta": o último quadro é igual ao primeiro
+        const voltas = rnd() < 0.5 ? 1 : 2;
+        tl.fromTo(d, { x: x0, y: y0 }, {
+          y: y0 - (H + 40) * voltas, duration: T, ease: 'none',
+          modifiers: { y: (y) => (((parseFloat(y) + 20) % (H + 40) + (H + 40)) % (H + 40)) - 20 + 'px' },
+        }, 0);
+        const amp = 6 + rnd() * 18;
+        tl.fromTo(d, { xPercent: 0 }, { xPercent: amp, duration: T / 4, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 0);
+      }
+
+      // cenas: empurrão lento de câmera e fusões quentes
+      tl.fromTo('#f1', { scale: 1 }, { scale: 1.07, duration: 3.3, ease: 'sine.inOut' }, 0);
+      tl.fromTo('#f2', { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'sine.inOut', immediateRender: false }, 2.7);
+      tl.fromTo('#f2', { scale: 1.1 }, { scale: 1.0, duration: 3.6, ease: 'sine.out', immediateRender: false }, 2.7);
+      tl.set('#f1', { opacity: 0 }, 3.45);
+      tl.fromTo('#f3', { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'sine.inOut', immediateRender: false }, 5.6);
+      tl.fromTo('#f3', { scale: 1.0 }, { scale: 1.06, duration: 3.2, ease: 'sine.inOut', immediateRender: false }, 5.6);
+      tl.set('#f2', { opacity: 0 }, 6.35);
+      // cena do forno com movimento real (Google Flow/Veo): entra em fusão e sai revelando a fornada
+      tl.fromTo('#forno-vivo', { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'sine.inOut', immediateRender: false }, 2.7);
+      tl.to('#forno-vivo', { opacity: 0, duration: 0.7, ease: 'sine.inOut' }, 5.6);
+      tl.fromTo('#f4', { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'sine.inOut', immediateRender: false }, 8.3);
+      // o brilho do forno respira nas trocas
+      for (const t0 of [2.6, 5.5, 8.2]) {
+        tl.fromTo('#luz', { opacity: 0 }, { opacity: 0.55, duration: 0.45, ease: 'sine.out', immediateRender: false }, t0);
+        tl.to('#luz', { opacity: 0, duration: 0.6, ease: 'sine.in' }, t0 + 0.45);
+      }
+
+      window.__timelines['main'] = tl;
+    </script>
+  </body>
+</html>

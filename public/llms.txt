@@ -1,0 +1,10 @@
+# Sereno Forno & Café (projeto conceitual)
+
+> Landing page de portfólio de uma padaria de fermentação natural e café **fictícia** no Crato (CE). Marca, endereço, preços, horários e depoimentos são inventados.
+
+- [Página inicial](/): fornadas com hora marcada, processo de 36 horas, cardápio e horários.
+- [Quadro de fornadas](/#fornadas): o que sai do forno hoje (horário de Brasília/Fortaleza).
+- [Cardápio](/#cardapio): pães, doces, café e brunch de sábado (preços fictícios).
+- [Visite](/#visite): horários e endereço fictício.
+
+Pedidos e reservas: WhatsApp (link sem número, por ser demonstração).

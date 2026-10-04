@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Sereno Forno &amp; Café | Padaria de fermentação natural no Crato (projeto conceitual)</title>
+    <meta
+      name="description"
+      content="Pão de fermentação natural de 36 horas, fornadas com hora marcada e café do Maciço de Baturité. Peça pelo WhatsApp. Projeto conceitual de portfólio com marca fictícia."
+    />
+    <meta name="theme-color" content="#14100D" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Sereno Forno & Café" />
+    <meta property="og:title" content="Sereno Forno & Café | Enquanto o bairro dorme, a massa trabalha" />
+    <meta
+      property="og:description"
+      content="Fermentação natural de 36 horas, fornadas com hora marcada e café coado na hora. Projeto conceitual de portfólio."
+    />
+    <meta property="og:image" content="/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Cestos de fermentação na madrugada, com o relógio marcando 03:40 e a frase: enquanto o bairro dorme, a massa trabalha." />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preload" as="font" href="/fonts/libre-caslon-display-latin.woff2" type="font/woff2" crossorigin />
+    <link rel="preload" as="font" href="/fonts/figtree-latin-wght.woff2" type="font/woff2" crossorigin />
+    <link rel="preload" as="image" href="/video/madrugada-9x16-poster.avif" type="image/avif" media="(max-aspect-ratio: 4/5)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/video/madrugada-16x9-poster.avif" type="image/avif" media="(min-aspect-ratio: 4/5)" fetchpriority="high" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": ["Bakery", "CafeOrCoffeeShop"],
+        "name": "Sereno Forno & Café",
+        "description": "Projeto conceitual (marca fictícia): padaria de fermentação natural e café com fornadas em hora marcada.",
+        "image": "/og.jpg",
+        "servesCuisine": ["Padaria", "Café", "Brunch"],
+        "priceRange": "R$",
+        "acceptsReservations": "True",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rua do Sereno, 47 (endereço fictício)",
+          "addressLocality": "Crato",
+          "addressRegion": "CE",
+          "addressCountry": "BR"
+        },
+        "openingHoursSpecification": [
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "06:00", "closes": "20:00" },
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "06:00", "closes": "21:00" },
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "06:00", "closes": "13:00" }
+        ]
+      }
+    </script>
+    <script>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="topo" id="topo">
+      <a class="topo-marca" translate="no" href="#inicio">Sereno <small>forno &amp; café</small></a>
+      <nav class="topo-nav" aria-label="Seções">
+        <a href="#fornadas">Fornadas</a>
+        <a href="#processo">Como fazemos</a>
+        <a href="#cardapio">Cardápio</a>
+        <a href="#visite">Visite</a>
+      </nav>
+      <a
+        class="btn btn-linha topo-cta"
+        href="https://wa.me/?text=Oi%2C%20Sereno!%20Quero%20fazer%20um%20pedido."
+        target="_blank"
+        rel="noopener"
+        ><i data-icon="whatsapp-logo"></i><span class="topo-cta-txt">Pedir pelo WhatsApp</span></a
+      >
+    </header>
+
+    <main id="conteudo">
+      <!-- ============ HERO: a madrugada em tela cheia ============ -->
+      <section class="hero" id="inicio" aria-labelledby="hero-titulo">
+        <div class="hero-midia">
+          <picture class="hero-poster">
+            <source media="(max-aspect-ratio: 4/5)" type="image/avif" srcset="/video/madrugada-9x16-poster.avif" />
+            <source media="(max-aspect-ratio: 4/5)" type="image/webp" srcset="/video/madrugada-9x16-poster.webp" />
+            <source type="image/avif" srcset="/video/madrugada-16x9-poster.avif" />
+            <img src="/video/madrugada-16x9-poster.webp" alt="" width="1600" height="900" fetchpriority="high" decoding="async" />
+          </picture>
+          <video
+            class="hero-video"
+            muted
+            loop
+            playsinline
+            preload="none"
+            aria-label="Vídeo em loop da madrugada na padaria: os pães descansam nos cestos, o forno a lenha acende e sai a primeira fornada."
+            data-h-webm="/video/madrugada-16x9.webm"
+            data-h-mp4="/video/madrugada-16x9.mp4"
+            data-v-webm="/video/madrugada-9x16.webm"
+            data-v-mp4="/video/madrugada-9x16.mp4"
+          ></video>
+          <div class="hero-veu" aria-hidden="true"></div>
+        </div>
+
+        <div class="relogio" aria-hidden="true">
+          <p class="relogio-hora"><span class="relogio-janela" data-relogio-hora>03:40</span></p>
+          <p class="relogio-legenda"><span class="relogio-janela" data-relogio-legenda>A massa descansa.</span></p>
+          <div class="linha-dia">
+            <span class="linha-trilho"></span>
+            <span class="linha-marca" data-relogio-marca></span>
+            <span class="linha-rot" style="--x: 0">3h</span>
+            <span class="linha-rot" style="--x: 0.25">4h</span>
+            <span class="linha-rot" style="--x: 0.5">5h</span>
+            <span class="linha-rot" style="--x: 0.75">6h</span>
+            <span class="linha-rot" style="--x: 1">7h</span>
+          </div>
+        </div>
+
+        <div class="hero-texto">
+          <h1 id="hero-titulo" class="hero-h1" data-linhas>Enquanto o bairro dorme, a&nbsp;massa trabalha.</h1>
+          <p class="hero-sub" data-entra>
+            Pão de fermentação natural com hora marcada para sair do forno, e café do Maciço de Baturité coado na hora.
+          </p>
+          <div class="hero-acoes" data-entra>
+            <a
+              class="btn btn-brasa btn-grande"
+              href="https://wa.me/?text=Oi%2C%20Sereno!%20Quero%20fazer%20um%20pedido."
+              target="_blank"
+              rel="noopener"
+              ><i data-icon="whatsapp-logo"></i>Pedir pelo WhatsApp</a
+            >
+            <a class="btn btn-linha btn-grande" href="#fornadas">Ver fornadas de hoje</a>
+          </div>
+        </div>
+
+        <div class="hero-pe" data-entra>
+          <a class="proxima" href="#fornadas">
+            <span class="proxima-marca" aria-hidden="true"></span>
+            <span class="proxima-rotulo">Próxima fornada:</span>
+            <span class="proxima-item" data-proxima-item>pão de fermentação natural, às 6h</span>
+          </a>
+          <button class="pausa" type="button" aria-pressed="false" data-pausa>
+            <span class="pausa-ico pausa-ico-pause"><i data-icon="pause"></i></span>
+            <span class="pausa-ico pausa-ico-play"><i data-icon="play"></i></span>
+            <span class="pausa-txt">Pausar vídeo</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ============ FORNADAS: o painel da madrugada ============ -->
+      <section class="fornadas noite" id="fornadas" aria-labelledby="fornadas-titulo">
+        <div class="moldura fornadas-grade">
+          <div class="fornadas-cabeca">
+            <h2 id="fornadas-titulo" class="titulo" data-linhas>O que sai do forno hoje</h2>
+            <p class="texto">Todo pão aqui tem hora marcada. Escolha a fornada e a gente avisa pelo WhatsApp quando ela sair.</p>
+            <p class="quadro-dia" data-quadro-dia>Hoje</p>
+            <p class="legenda" aria-label="Legenda dos estados">
+              <span class="estado estado-saiu"><span class="estado-marca"></span>saiu</span>
+              <span class="estado estado-forno"><span class="estado-marca"></span>no forno</span>
+              <span class="estado estado-depois"><span class="estado-marca"></span>mais tarde</span>
+            </p>
+          </div>
+          <ol class="quadro" data-quadro-lista>
+            <!-- preenchido pelo script; versão sem JS abaixo -->
+            <li class="quadro-linha"><span class="quadro-hora">06:00</span><span class="quadro-nome">Pão de fermentação natural</span></li>
+            <li class="quadro-linha"><span class="quadro-hora">07:00</span><span class="quadro-nome">Croissant de manteiga da terra</span></li>
+            <li class="quadro-linha"><span class="quadro-hora">09:30</span><span class="quadro-nome">Focaccia de queijo coalho e mel de engenho</span></li>
+            <li class="quadro-linha"><span class="quadro-hora">15:30</span><span class="quadro-nome">Bolo de macaxeira</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ============ FAIXA (o único marquee) ============ -->
+      <div class="faixa" aria-hidden="true">
+        <div class="faixa-trilho" data-faixa>
+          <span>rapadura</span><b></b><span>queijo coalho</span><b></b><span>manteiga da terra</span><b></b
+          ><span>mel de engenho</span><b></b><span>macaxeira</span><b></b><span>café de Baturité</span><b></b
+          ><span>milho</span><b></b><span>goiabada</span><b></b>
+        </div>
+      </div>
+
+      <!-- ============ PROCESSO: 36 horas, da madrugada ao dia ============ -->
+      <section class="processo" id="processo" aria-labelledby="processo-titulo">
+        <div class="processo-pino" data-processo>
+          <div class="processo-cabeca">
+            <h2 id="processo-titulo" class="titulo" data-linhas>36 horas para um pão</h2>
+            <p class="processo-relogio" aria-hidden="true"><span data-processo-hora>0</span><small>h</small></p>
+            <div class="processo-linha" aria-hidden="true"><span data-processo-progresso></span></div>
+            <p class="processo-nota">Da véspera à primeira fornada, a massa atravessa a madrugada.</p>
+          </div>
+
+          <ol class="processo-trilho" data-processo-trilho>
+            <li class="etapa etapa-clara" data-hora="0">
+              <foto nome="levain" alt="Pote de vidro com levain borbulhando sobre tábua enfarinhada" sizes="(min-width: 900px) 28vw, 92vw" class="etapa-foto"></foto>
+              <div class="etapa-texto">
+                <p class="etapa-hora"><time>0h</time> 18h da véspera</p>
+                <h3>Alimentar o levain</h3>
+                <p>O fermento natural da casa come farinha e água. Nada de fermento biológico, nada de melhorador.</p>
+              </div>
+            </li>
+            <li class="etapa" data-hora="4">
+              <foto nome="ia-maos-massa" alt="Mãos enfarinhadas esticando e dobrando a massa sobre a bancada de madeira, farinha no ar" sizes="(min-width: 900px) 28vw, 92vw" class="etapa-foto"></foto>
+              <div class="etapa-texto">
+                <p class="etapa-hora"><time>4h</time> 22h</p>
+                <h3>Dobrar, não sovar</h3>
+                <p>Quatro séries de dobras com descanso entre elas. A massa ganha força sem esquentar.</p>
+              </div>
+            </li>
+            <li class="etapa" data-hora="10">
+              <foto nome="ia-hero-cestos-9x16" alt="Pães modelados descansando em cestos de vime forrados com linho, farinha na bancada escura" sizes="(min-width: 900px) 28vw, 92vw" class="etapa-foto"></foto>
+              <div class="etapa-texto">
+                <p class="etapa-hora"><time>10h</time> 4h da manhã do dia seguinte</p>
+                <h3>Modelar e dormir no frio</h3>
+                <p>Os pães vão para os cestos e passam 20 horas a 4 °C. É nessa espera que nasce o sabor.</p>
+              </div>
+            </li>
+            <li class="etapa" data-hora="34">
+              <foto nome="ia-hero-forno-9x16" alt="Forno a lenha de tijolos aceso, com a pá de madeira enfarinhada pronta na boca do forno" sizes="(min-width: 900px) 28vw, 92vw" class="etapa-foto"></foto>
+              <div class="etapa-texto">
+                <p class="etapa-hora"><time>34h</time> 4h30 da madrugada</p>
+                <h3>Cortar e assar</h3>
+                <p>Corte na lâmina, forno a 250 °C e vapor nos primeiros 15 minutos. A casca abre onde a lâmina mandou.</p>
+              </div>
+            </li>
+            <li class="etapa" data-hora="36">
+              <foto nome="ia-miolo" alt="Pão de fermentação natural partido ao meio, miolo aberto e casca escura brilhando na luz lateral" sizes="(min-width: 900px) 28vw, 92vw" class="etapa-foto"></foto>
+              <div class="etapa-texto">
+                <p class="etapa-hora"><time>36h</time> 6h em ponto</p>
+                <h3>Na sua mesa</h3>
+                <p>Primeira fornada do dia. Casca que estala, miolo aberto e um cheiro que chega na esquina.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ============ DO NORDESTE (4 blocos) ============ -->
+      <section class="nordeste dia" id="nordeste" aria-labelledby="nordeste-titulo">
+        <div class="moldura">
+          <div class="nordeste-cabeca">
+            <h2 id="nordeste-titulo" class="titulo" data-linhas>Do Nordeste para o forno</h2>
+            <p class="texto">O sotaque da casa está nos ingredientes: tudo o que dá para comprar perto, a gente compra perto.</p>
+          </div>
+          <div class="nordeste-grade">
+            <figure class="nd nd-abre">
+              <div class="revela" data-revela><foto nome="ia-nordeste" alt="Queijo coalho tostado, rapadura, manteiga da terra num pote de barro e uma focaccia sobre a mesa de madeira escura" sizes="(min-width: 900px) 92vw, 100vw"></foto></div>
+              <figcaption>
+                <h3>Queijo coalho, rapadura, manteiga da terra</h3>
+                <p>Comprados toda semana de pequenos produtores do Ceará e da Paraíba.</p>
+              </figcaption>
+            </figure>
+            <figure class="nd nd-cafe">
+              <div class="revela" data-revela>
+                <foto nome="ia-cafe-vapor" alt="Café coado caindo numa xícara de cerâmica escura, com vapor e grãos espalhados na mesa" sizes="(min-width: 900px) 30vw, 92vw"></foto>
+                <svg class="vapor" viewBox="0 0 200 260" aria-hidden="true" focusable="false">
+                  <path d="M80 250 C 60 200, 110 170, 88 120 S 70 50, 96 10" />
+                  <path d="M110 250 C 130 205, 90 175, 112 128 S 132 60, 108 18" />
+                  <path d="M96 250 C 84 215, 116 190, 100 150 S 92 90, 104 40" />
+                </svg>
+              </div>
+              <figcaption>
+                <h3>Café do Maciço de Baturité</h3>
+                <p>Grão sombreado, torrado em lotes pequenos toda segunda.</p>
+              </figcaption>
+            </figure>
+            <div class="nd nd-numero">
+              <p class="nd-frase">Oito produtores parceiros, todos a menos de 300&nbsp;km do forno.</p>
+              <p>Queijo coalho, rapadura, mel de engenho e manteiga da terra chegam toda semana dos sítios.</p>
+            </div>
+            <figure class="nd nd-sobra">
+              <div class="revela" data-revela><foto nome="prateleira" alt="Prateleira de padaria com pães de vários formatos" sizes="(min-width: 900px) 30vw, 92vw"></foto></div>
+              <figcaption>
+                <h3>Nada vai para o lixo</h3>
+                <p>O que sobra às 20h segue para a cozinha comunitária do bairro.</p>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CARDÁPIO ============ -->
+      <section class="cardapio tostado" id="cardapio" aria-labelledby="cardapio-titulo">
+        <div class="moldura cardapio-grade">
+          <div class="cardapio-lista">
+            <h2 id="cardapio-titulo" class="titulo" data-linhas>Cardápio</h2>
+            <p class="texto">Preços fictícios, como a marca. Para encomendar, é só mandar a lista no WhatsApp.</p>
+
+            <div class="abas" role="tablist" aria-label="Categorias do cardápio">
+              <button role="tab" id="aba-paes" aria-controls="painel-paes" aria-selected="true" tabindex="0">Pães</button>
+              <button role="tab" id="aba-doces" aria-controls="painel-doces" aria-selected="false" tabindex="-1">Doces e bolos</button>
+              <button role="tab" id="aba-cafe" aria-controls="painel-cafe" aria-selected="false" tabindex="-1">Café</button>
+              <button role="tab" id="aba-brunch" aria-controls="painel-brunch" aria-selected="false" tabindex="-1">Brunch de sábado</button>
+              <span class="abas-traco" aria-hidden="true"></span>
+            </div>
+
+            <div class="painel" role="tabpanel" id="painel-paes" aria-labelledby="aba-paes" tabindex="0">
+              <ul class="itens">
+                <li data-foto="casca"><span class="item-nome">Pão de fermentação natural <small>750 g</small></span><span class="item-pontos"></span><span class="item-preco">R$ 28</span></li>
+                <li data-foto="maos-pao"><span class="item-nome">Pão de milho e manteiga da terra</span><span class="item-pontos"></span><span class="item-preco">R$ 22</span></li>
+                <li data-foto="focaccia"><span class="item-nome">Focaccia de queijo coalho e mel de engenho <small>fatia</small></span><span class="item-pontos"></span><span class="item-preco">R$ 16</span></li>
+                <li data-foto="pao-de-queijo"><span class="item-nome">Pão de queijo coalho <small>6 unidades</small></span><span class="item-pontos"></span><span class="item-preco">R$ 18</span></li>
+                <li data-foto="paes"><span class="item-nome">Ciabatta de azeite <small>2 unidades</small></span><span class="item-pontos"></span><span class="item-preco">R$ 14</span></li>
+              </ul>
+            </div>
+            <div class="painel" role="tabpanel" id="painel-doces" aria-labelledby="aba-doces" tabindex="0" hidden>
+              <ul class="itens">
+                <li data-foto="croissant-farinha"><span class="item-nome">Croissant de manteiga da terra</span><span class="item-pontos"></span><span class="item-preco">R$ 13</span></li>
+                <li data-foto="croissant"><span class="item-nome">Brioche de rapadura</span><span class="item-pontos"></span><span class="item-preco">R$ 15</span></li>
+                <li data-foto="bolo"><span class="item-nome">Bolo de macaxeira <small>fatia</small></span><span class="item-pontos"></span><span class="item-preco">R$ 12</span></li>
+                <li data-foto="bolo"><span class="item-nome">Bolo de rolo de goiabada <small>fatia</small></span><span class="item-pontos"></span><span class="item-preco">R$ 14</span></li>
+              </ul>
+            </div>
+            <div class="painel" role="tabpanel" id="painel-cafe" aria-labelledby="aba-cafe" tabindex="0" hidden>
+              <ul class="itens">
+                <li data-foto="espresso"><span class="item-nome">Espresso</span><span class="item-pontos"></span><span class="item-preco">R$ 7</span></li>
+                <li data-foto="chaleira"><span class="item-nome">Coado na hora <small>V60, 250 ml</small></span><span class="item-pontos"></span><span class="item-preco">R$ 12</span></li>
+                <li data-foto="cappuccino"><span class="item-nome">Cappuccino</span><span class="item-pontos"></span><span class="item-preco">R$ 13</span></li>
+                <li data-foto="ia-cafe-vapor"><span class="item-nome">Café com leite e rapadura</span><span class="item-pontos"></span><span class="item-preco">R$ 11</span></li>
+                <li data-foto="coado"><span class="item-nome">Café gelado com caldo de cana</span><span class="item-pontos"></span><span class="item-preco">R$ 15</span></li>
+              </ul>
+            </div>
+            <div class="painel" role="tabpanel" id="painel-brunch" aria-labelledby="aba-brunch" tabindex="0" hidden>
+              <ul class="itens">
+                <li data-foto="ia-miolo"><span class="item-nome">Torrada de levain, manteiga da terra e ovo caipira</span><span class="item-pontos"></span><span class="item-preco">R$ 32</span></li>
+                <li data-foto="pao-de-queijo"><span class="item-nome">Cuscuz da casa com queijo coalho e ovo</span><span class="item-pontos"></span><span class="item-preco">R$ 29</span></li>
+                <li data-foto="croissant-farinha"><span class="item-nome">Prato Sereno <small>para dois</small></span><span class="item-pontos"></span><span class="item-preco">R$ 98</span></li>
+              </ul>
+              <p class="nota-brunch">Sábado, das 8h às 13h, só com reserva.</p>
+            </div>
+          </div>
+
+          <figure class="cardapio-foto" aria-hidden="true">
+            <foto nome="casca" alt="" sizes="(min-width: 900px) 38vw, 92vw"></foto>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============ DEPOIMENTOS ============ -->
+      <section class="vizinhos dia" id="vizinhos" aria-labelledby="vizinhos-titulo">
+        <div class="moldura vizinhos-grade">
+          <h2 id="vizinhos-titulo" class="titulo-menor">O que dizem na fila</h2>
+          <div class="citacoes" data-citacoes>
+            <figure class="citacao" data-citacao>
+              <blockquote><p>“Acordo com o cheiro do forno. Às 6h01 já estou na fila, e o pão ainda estala dentro do saco.”</p></blockquote>
+              <figcaption>Socorro Alencar, <span>vizinha da rua de cima</span></figcaption>
+            </figure>
+            <figure class="citacao" data-citacao hidden>
+              <blockquote><p>“O quadro de fornadas mudou meu domingo. Saio do pedal sabendo que a focaccia sai às 9h30.”</p></blockquote>
+              <figcaption>Tiago Bezerra, <span>ciclista de domingo</span></figcaption>
+            </figure>
+            <figure class="citacao" data-citacao hidden>
+              <blockquote><p>“O bolo de macaxeira tem o gosto do que minha mãe fazia. A diferença é que não preciso ralar nada.”</p></blockquote>
+              <figcaption>Lúcia Feitosa, <span>cliente da fornada das 6h</span></figcaption>
+            </figure>
+            <div class="citacoes-controles">
+              <button type="button" class="seta" data-anterior aria-label="Depoimento anterior"><i data-icon="arrow-left"></i></button>
+              <p class="citacoes-contador" aria-live="polite"><span data-atual>1</span> de 3</p>
+              <button type="button" class="seta" data-proximo aria-label="Próximo depoimento"><i data-icon="arrow-right"></i></button>
+            </div>
+          </div>
+          <p class="aviso-ficticio">Depoimentos fictícios, escritos para este projeto conceitual.</p>
+        </div>
+      </section>
+
+      <!-- ============ VISITE ============ -->
+      <section class="visite tostado" id="visite" aria-labelledby="visite-titulo">
+        <div class="visite-grade">
+          <div class="visite-texto">
+            <h2 id="visite-titulo" class="titulo" data-linhas>Passe na padaria</h2>
+            <p class="status-loja" data-status-loja><span class="status-marca"></span><span data-status-texto>Terça a domingo, a partir das 6h</span></p>
+            <dl class="horarios">
+              <div data-dias="2,3,4,5"><dt>Terça a sexta</dt><dd>6h às 20h</dd></div>
+              <div data-dias="6"><dt>Sábado</dt><dd>6h às 21h <small>brunch das 8h às 13h</small></dd></div>
+              <div data-dias="0"><dt>Domingo</dt><dd>6h às 13h</dd></div>
+              <div data-dias="1"><dt>Segunda</dt><dd>Fechado <small>o levain descansa</small></dd></div>
+            </dl>
+            <div class="visite-acoes">
+              <a
+                class="btn btn-brasa btn-grande"
+                href="https://wa.me/?text=Oi%2C%20Sereno!%20Quero%20reservar%20uma%20mesa%20para%20o%20brunch%20de%20s%C3%A1bado."
+                target="_blank"
+                rel="noopener"
+                ><i data-icon="whatsapp-logo"></i>Reservar pelo WhatsApp</a
+              >
+              <a class="link" href="https://wa.me/?text=Oi%2C%20Sereno!%20Quero%20fazer%20um%20pedido." target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
+            </div>
+            <address class="endereco">
+              <span class="endereco-rua">Rua do Sereno, 47</span>
+              <span>Pimenta, Crato (CE). Endereço fictício.</span>
+              <span>Traga sua sacola de pano: o cafezinho é por nossa conta.</span>
+            </address>
+          </div>
+          <div class="visite-foto revela" data-revela>
+            <foto nome="ia-hero-fornada-9x16" alt="Pães de fermentação natural recém-saídos do forno, com vapor e farinha no ar sobre a bancada" sizes="(min-width: 900px) 50vw, 100vw"></foto>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <p class="rodape-letreiro" aria-hidden="true" translate="no"><span data-rodape-letreiro>Sereno</span></p>
+      <div class="moldura rodape-grade">
+        <p class="rodape-conceito">
+          <strong>Projeto conceitual / peça de portfólio.</strong> <span translate="no">Sereno Forno &amp; Café</span> é uma marca fictícia:
+          endereço, preços, horários e depoimentos foram inventados para mostrar como uma landing page de padaria pode
+          funcionar. O botão de WhatsApp abre a conversa sem número.
+        </p>
+        <details class="creditos">
+          <summary>Créditos das imagens</summary>
+          <p>
+            Fotos sob a Licença Unsplash: Margaret Jaszowska, Alex Preusser, Conor Brown, Diego Arenas de Rodrigo, rodolfo allen_, Stephen Kidd, Najib Kalil, Nathan Dumlao, Christopher Yiu Chung, Maite Paternain, Gaia&amp;Co, Mae Mu, Maria Orlova e Franzi Meyer.
+            Algumas imagens (processo, café, ingredientes, visita e o vídeo da madrugada) são ilustrações geradas por IA, não fotos da padaria. Vídeo montado com HyperFrames.
+          </p>
+        </details>
+        <a class="rodape-topo" href="#inicio">Voltar ao topo</a>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

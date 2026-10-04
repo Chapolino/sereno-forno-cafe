@@ -1,0 +1,35 @@
+{
+  "name": "sereno-forno-cafe",
+  "version": "1.0.0",
+  "description": "Landing page conceitual (portfólio): Sereno Forno & Café, padaria de fermentação natural fictícia.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "imagens": "node scripts/otimizar-imagens.mjs",
+    "baixar-fotos": "node scripts/baixar-fotos.mjs",
+    "prints": "node scripts/prints.mjs",
+    "demo": "node scripts/demo.mjs",
+    "icones": "node scripts/icones.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "type": "module",
+  "dependencies": {
+    "@fontsource-variable/figtree": "^5.3.0",
+    "@fontsource/alfa-slab-one": "^5.3.0",
+    "@fontsource/libre-caslon-display": "^5.3.0",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.26"
+  },
+  "devDependencies": {
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@phosphor-icons/core": "^2.1.1",
+    "lighthouse": "^13.5.0",
+    "playwright-core": "^1.63.0",
+    "vite": "^8.3.2"
+  },
+  "private": true
+}

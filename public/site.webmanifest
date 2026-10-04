@@ -1,0 +1,13 @@
+{
+  "name": "Sereno Forno & Café",
+  "short_name": "Sereno",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#14100D",
+  "theme_color": "#14100D",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

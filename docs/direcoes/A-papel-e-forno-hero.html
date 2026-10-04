@@ -1,0 +1,40 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A · Papel e Forno · hero</title><style>
+@font-face{font-family:Caslon;src:url(fontes/libre-caslon-display-latin.woff2) format('woff2')}
+@font-face{font-family:Instrument;src:url(fontes/instrument-serif-latin.woff2) format('woff2')}
+@font-face{font-family:Instrument;font-style:italic;src:url(fontes/instrument-serif-latin-italic.woff2) format('woff2')}
+@font-face{font-family:Figtree;src:url(fontes/figtree-latin-wght.woff2) format('woff2');font-weight:300 900}*{box-sizing:border-box;margin:0;padding:0}html,body{height:100%}body{-webkit-font-smoothing:antialiased;font-family:Figtree,system-ui,sans-serif}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+.grao::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:multiply;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+:root{--papel:#F1EADF;--tostado:#E6DACA;--cafe:#231A14;--casca:#6B5747;--forno:#A6461F;--noite:#1E2A44}
+body{background:var(--papel);color:var(--cafe)}
+.top{height:72px;display:flex;align-items:center;gap:40px;padding:0 56px;border-bottom:1px solid rgba(35,26,20,.14);background:var(--papel)}
+.marca{font:400 30px/1 Caslon,serif;letter-spacing:-.01em}.marca small{font:500 13px Figtree;color:var(--casca);margin-left:10px;letter-spacing:.01em}
+nav{margin-left:auto;display:flex;gap:32px;font-size:15px;font-weight:500}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--cafe);color:var(--papel);font-weight:600;font-size:15px;padding:13px 20px;border-radius:2px}
+.hero{display:grid;grid-template-columns:44% 56%;height:calc(100vh - 72px)}
+.txt{padding:56px 56px 48px;display:flex;flex-direction:column;justify-content:center;gap:26px}
+h1{font:400 92px/.98 Caslon,serif;letter-spacing:-.022em;max-width:9.5ch}
+.sub{font-size:19px;line-height:1.55;color:var(--casca);max-width:34ch}
+.acoes{display:flex;align-items:center;gap:28px}.link{font-weight:600;border-bottom:1px solid var(--forno);padding-bottom:3px}
+.prox{display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--casca);padding-top:22px;border-top:1px solid rgba(35,26,20,.14)}
+.prox i{width:8px;height:8px;border-radius:50%;background:var(--forno)}.prox b{color:var(--cafe);font-weight:600}
+.janela{position:relative;overflow:hidden;background:var(--noite)}
+.janela img{width:100%;height:100%;object-fit:cover;object-position:30% 60%;filter:brightness(.82)}
+.janela::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,42,68,.55),rgba(30,42,68,0) 45%,rgba(20,14,10,.7));z-index:1}
+.relogio{position:absolute;z-index:2;left:48px;bottom:44px;color:#F1EADF;display:grid;gap:8px}
+.relogio .h{font:400 84px/1 Caslon,serif;letter-spacing:-.01em;font-variant-numeric:tabular-nums}.relogio .c{font-size:17px;font-weight:500}
+.tl{position:relative;height:34px;width:100%;max-width:300px}.tl-trilho{position:absolute;left:0;right:0;top:8px;height:1px;background:var(--c);opacity:.6}
+.tl-marca{position:absolute;top:3px;width:11px;height:11px;margin-left:-5px;border-radius:50%;background:var(--m)}
+.tl-r{position:absolute;top:18px;font-size:11px;letter-spacing:.02em;color:var(--c);opacity:.85;transform:translateX(-50%)}
+@media (max-width:600px){.top{height:60px;padding:0 18px}.top nav{display:none}.marca small{display:none}.btn.topo{margin-left:auto;padding:10px 14px;font-size:14px}
+.hero{display:block;height:auto}.txt{padding:34px 18px 28px;gap:20px}h1{font-size:46px}.sub{font-size:16.5px}.acoes{gap:18px;flex-wrap:wrap}
+.prox{display:block;line-height:1.5}.prox i{display:inline-block;margin-right:8px}.janela{height:420px}.relogio{left:18px;bottom:24px}.relogio .h{font-size:58px}}</style></head><body class="grao"><header class="top"><span class="marca">Sereno<small>forno &amp; café</small></span>
+<nav><a>Fornadas</a><a>Como fazemos</a><a>Cardápio</a><a>Visite</a></nav><a class="btn topo">Pedir pelo WhatsApp</a></header>
+<section class="hero"><div class="txt">
+<h1>Enquanto o bairro dorme, a&nbsp;massa trabalha.</h1>
+<p class="sub">Pão de fermentação natural com hora marcada para sair do forno, e café do Maciço de Baturité coado na hora.</p>
+<div class="acoes"><a class="btn">Pedir pelo WhatsApp</a><a class="link">Ver fornadas de hoje</a></div>
+<p class="prox"><i></i>Próxima fornada: <b>focaccia de queijo coalho, às 9h30</b></p></div>
+<div class="janela"><img src="../../public/img/fogo-1600.webp" alt=""><div class="relogio"><span class="h">04:30</span><span class="c">O forno acende.</span><div class="tl" style="--c:#F1EADF;--m:#D9774A"><span class="tl-trilho"></span><span class="tl-marca" style="left:37.5%"></span>
+<span class="tl-r" style="left:0">3h</span><span class="tl-r" style="left:25%">4h</span><span class="tl-r" style="left:50%">5h</span><span class="tl-r" style="left:75%">6h</span><span class="tl-r" style="left:100%">7h</span></div></div></div></section></body></html>

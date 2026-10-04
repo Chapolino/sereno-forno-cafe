@@ -95,7 +95,7 @@ await rolar(modo === 'mobile' ? 1700 : 700, 110, 60);
 await rolarAte('#cardapio', modo === 'mobile' ? -10 : 40);
 await espera(800);
 if (modo === 'desktop') {
-  for (const li of await page.$$('#painel-paes li')) {
+  for (const li of (await page.$$('#painel-paes li')).slice(0, 5)) {
     await li.hover();
     await espera(650);
   }

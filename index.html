@@ -241,7 +241,7 @@
       <!-- ============ DO NORDESTE (4 blocos) ============ -->
       <section class="nordeste dia" id="nordeste" aria-labelledby="nordeste-titulo">
         <div class="moldura">
-          <div class="nordeste-cabeca">
+          <div class="nordeste-cabeca cabeca-dupla">
             <h2 id="nordeste-titulo" class="titulo" data-linhas>Do Nordeste para o forno</h2>
             <p class="texto">O sotaque da casa está nos ingredientes: tudo o que dá para comprar perto, a gente compra perto.</p>
           </div>
@@ -267,10 +267,23 @@
                 <p>Grão sombreado, torrado em lotes pequenos toda segunda.</p>
               </figcaption>
             </figure>
-            <div class="nd nd-numero">
-              <p class="nd-frase">Oito produtores parceiros, todos a menos de 300&nbsp;km do forno.</p>
-              <p>Queijo coalho, rapadura, mel de engenho e manteiga da terra chegam toda semana dos sítios.</p>
-            </div>
+            <figure class="nd nd-numero">
+              <div class="nd-painel">
+                <p class="nd-grande" aria-hidden="true">8</p>
+                <p class="nd-painel-rot">produtores parceiros</p>
+                <ul class="nd-produtores">
+                  <li><span>Queijo coalho</span><span>Sítio Baixio, Barbalha</span><b>14 km</b></li>
+                  <li><span>Rapadura e mel de engenho</span><span>Engenho São Bento, Barbalha</span><b>16 km</b></li>
+                  <li><span>Manteiga da terra</span><span>Fazenda Riacho, Missão Velha</span><b>38 km</b></li>
+                  <li><span>Milho e macaxeira</span><span>Feira do Crato, toda sexta</span><b>2 km</b></li>
+                  <li><span>Café</span><span>Sítio Pedra Branca, Baturité</span><b>290 km</b></li>
+                </ul>
+              </div>
+              <figcaption>
+                <h3>Oito produtores, nenhum a mais de 300&nbsp;km</h3>
+                <p>Chegam toda semana dos sítios. Nomes fictícios, como a marca.</p>
+              </figcaption>
+            </figure>
             <figure class="nd nd-sobra">
               <div class="revela" data-revela><foto nome="prateleira" alt="Prateleira de padaria com pães de vários formatos" sizes="(min-width: 900px) 30vw, 92vw"></foto></div>
               <figcaption>
@@ -285,57 +298,103 @@
       <!-- ============ CARDÁPIO ============ -->
       <section class="cardapio tostado" id="cardapio" aria-labelledby="cardapio-titulo">
         <div class="moldura cardapio-grade">
-          <div class="cardapio-lista">
+          <div class="cardapio-cabeca">
             <h2 id="cardapio-titulo" class="titulo" data-linhas>Cardápio</h2>
             <p class="texto">Preços fictícios, como a marca. Para encomendar, é só mandar a lista no WhatsApp.</p>
+          </div>
+          <ol class="como-pedir" aria-label="Como encomendar">
+            <li><b aria-hidden="true">1</b><span>Mande a lista no WhatsApp até as <strong>18h da véspera</strong>.</span></li>
+            <li><b aria-hidden="true">2</b><span>Escolha a fornada: o pão fica separado, ainda quente.</span></li>
+            <li><b aria-hidden="true">3</b><span>Retire no balcão e pague com Pix, cartão ou dinheiro.</span></li>
+          </ol>
 
+          <div class="cardapio-lista">
             <div class="abas" role="tablist" aria-label="Categorias do cardápio">
-              <button role="tab" id="aba-paes" aria-controls="painel-paes" aria-selected="true" tabindex="0">Pães</button>
-              <button role="tab" id="aba-doces" aria-controls="painel-doces" aria-selected="false" tabindex="-1">Doces e bolos</button>
-              <button role="tab" id="aba-cafe" aria-controls="painel-cafe" aria-selected="false" tabindex="-1">Café</button>
-              <button role="tab" id="aba-brunch" aria-controls="painel-brunch" aria-selected="false" tabindex="-1">Brunch de sábado</button>
+              <button role="tab" id="aba-paes" aria-controls="painel-paes" aria-selected="true" tabindex="0">Pães<span class="aba-n" aria-hidden="true">8</span></button>
+              <button role="tab" id="aba-doces" aria-controls="painel-doces" aria-selected="false" tabindex="-1">Doces e bolos<span class="aba-n" aria-hidden="true">8</span></button>
+              <button role="tab" id="aba-cafe" aria-controls="painel-cafe" aria-selected="false" tabindex="-1">Café<span class="aba-n" aria-hidden="true">8</span></button>
+              <button role="tab" id="aba-brunch" aria-controls="painel-brunch" aria-selected="false" tabindex="-1">Brunch de sábado<span class="aba-n" aria-hidden="true">6</span></button>
               <span class="abas-traco" aria-hidden="true"></span>
             </div>
 
-            <div class="painel" role="tabpanel" id="painel-paes" aria-labelledby="aba-paes" tabindex="0">
-              <ul class="itens">
-                <li data-foto="casca"><span class="item-nome">Pão de fermentação natural <small>750 g</small></span><span class="item-pontos"></span><span class="item-preco">R$ 28</span></li>
-                <li data-foto="maos-pao"><span class="item-nome">Pão de milho e manteiga da terra</span><span class="item-pontos"></span><span class="item-preco">R$ 22</span></li>
-                <li data-foto="focaccia"><span class="item-nome">Focaccia de queijo coalho e mel de engenho <small>fatia</small></span><span class="item-pontos"></span><span class="item-preco">R$ 16</span></li>
-                <li data-foto="pao-de-queijo"><span class="item-nome">Pão de queijo coalho <small>6 unidades</small></span><span class="item-pontos"></span><span class="item-preco">R$ 18</span></li>
-                <li data-foto="paes"><span class="item-nome">Ciabatta de azeite <small>2 unidades</small></span><span class="item-pontos"></span><span class="item-preco">R$ 14</span></li>
-              </ul>
-            </div>
-            <div class="painel" role="tabpanel" id="painel-doces" aria-labelledby="aba-doces" tabindex="0" hidden>
-              <ul class="itens">
-                <li data-foto="croissant-farinha"><span class="item-nome">Croissant de manteiga da terra</span><span class="item-pontos"></span><span class="item-preco">R$ 13</span></li>
-                <li data-foto="croissant"><span class="item-nome">Brioche de rapadura</span><span class="item-pontos"></span><span class="item-preco">R$ 15</span></li>
-                <li data-foto="bolo"><span class="item-nome">Bolo de macaxeira <small>fatia</small></span><span class="item-pontos"></span><span class="item-preco">R$ 12</span></li>
-                <li data-foto="bolo"><span class="item-nome">Bolo de rolo de goiabada <small>fatia</small></span><span class="item-pontos"></span><span class="item-preco">R$ 14</span></li>
-              </ul>
-            </div>
-            <div class="painel" role="tabpanel" id="painel-cafe" aria-labelledby="aba-cafe" tabindex="0" hidden>
-              <ul class="itens">
-                <li data-foto="espresso"><span class="item-nome">Espresso</span><span class="item-pontos"></span><span class="item-preco">R$ 7</span></li>
-                <li data-foto="chaleira"><span class="item-nome">Coado na hora <small>V60, 250 ml</small></span><span class="item-pontos"></span><span class="item-preco">R$ 12</span></li>
-                <li data-foto="cappuccino"><span class="item-nome">Cappuccino</span><span class="item-pontos"></span><span class="item-preco">R$ 13</span></li>
-                <li data-foto="ia-cafe-vapor"><span class="item-nome">Café com leite e rapadura</span><span class="item-pontos"></span><span class="item-preco">R$ 11</span></li>
-                <li data-foto="coado"><span class="item-nome">Café gelado com caldo de cana</span><span class="item-pontos"></span><span class="item-preco">R$ 15</span></li>
-              </ul>
-            </div>
-            <div class="painel" role="tabpanel" id="painel-brunch" aria-labelledby="aba-brunch" tabindex="0" hidden>
-              <ul class="itens">
-                <li data-foto="ia-miolo"><span class="item-nome">Torrada de levain, manteiga da terra e ovo caipira</span><span class="item-pontos"></span><span class="item-preco">R$ 32</span></li>
-                <li data-foto="pao-de-queijo"><span class="item-nome">Cuscuz da casa com queijo coalho e ovo</span><span class="item-pontos"></span><span class="item-preco">R$ 29</span></li>
-                <li data-foto="croissant-farinha"><span class="item-nome">Prato Sereno <small>para dois</small></span><span class="item-pontos"></span><span class="item-preco">R$ 98</span></li>
-              </ul>
-              <p class="nota-brunch">Sábado, das 8h às 13h, só com reserva.</p>
+            <div class="paineis">
+              <div class="painel" role="tabpanel" id="painel-paes" aria-labelledby="aba-paes" tabindex="0">
+                <ul class="itens">
+                  <li data-foto="casca"><span class="item-nome">Pão de fermentação natural <small>750 g</small></span><span class="item-pontos"></span><span class="item-preco">R$ 28</span><span class="item-desc">Casca grossa, miolo aberto, 36 horas de fermentação.</span></li>
+                  <li data-foto="maos-pao"><span class="item-nome">Pão de milho e manteiga da terra</span><span class="item-pontos"></span><span class="item-preco">R$ 22</span><span class="item-desc">Fubá do Cariri e manteiga de garrafa na massa.</span></li>
+                  <li data-foto="focaccia"><span class="item-nome">Focaccia de queijo coalho e mel de engenho <small>fatia</small></span><span class="item-pontos"></span><span class="item-preco">R$ 16</span></li>
+                  <li data-foto="pao-de-queijo"><span class="item-nome">Pão de queijo coalho <small>6 unidades</small></span><span class="item-pontos"></span><span class="item-preco">R$ 18</span></li>
+                  <li data-foto="paes"><span class="item-nome">Integral de centeio e rapadura <small>600 g</small></span><span class="item-pontos"></span><span class="item-preco">R$ 26</span><span class="item-desc">Mais denso e levemente doce; aguenta a semana.</span></li>
+                  <li data-foto="prateleira"><span class="item-nome">Ciabatta de azeite <small>2 unidades</small></span><span class="item-pontos"></span><span class="item-preco">R$ 14</span></li>
+                  <li data-foto="prateleira"><span class="item-nome">Baguete da casa</span><span class="item-pontos"></span><span class="item-preco">R$ 12</span></li>
+                  <li data-foto="ia-miolo"><span class="item-nome">Pão de forma de levain <small>500 g, fatiado</small></span><span class="item-pontos"></span><span class="item-preco">R$ 24</span></li>
+                </ul>
+              </div>
+              <div class="painel" role="tabpanel" id="painel-doces" aria-labelledby="aba-doces" tabindex="0" hidden>
+                <ul class="itens">
+                  <li data-foto="croissant-farinha"><span class="item-nome">Croissant de manteiga da terra</span><span class="item-pontos"></span><span class="item-preco">R$ 13</span><span class="item-desc">27 camadas, laminado na véspera.</span></li>
+                  <li data-foto="croissant"><span class="item-nome">Brioche de rapadura</span><span class="item-pontos"></span><span class="item-preco">R$ 15</span></li>
+                  <li data-foto="bolo"><span class="item-nome">Bolo de macaxeira <small>fatia</small></span><span class="item-pontos"></span><span class="item-preco">R$ 12</span><span class="item-desc">Receita de família, assado na forma de ferro.</span></li>
+                  <li data-foto="bolo"><span class="item-nome">Bolo de rolo de goiabada <small>fatia</small></span><span class="item-pontos"></span><span class="item-preco">R$ 14</span></li>
+                  <li data-foto="bolo"><span class="item-nome">Bolo de milho cremoso <small>fatia</small></span><span class="item-pontos"></span><span class="item-preco">R$ 11</span></li>
+                  <li data-foto="croissant"><span class="item-nome">Rolinho de canela e rapadura</span><span class="item-pontos"></span><span class="item-preco">R$ 14</span></li>
+                  <li data-foto="croissant-farinha"><span class="item-nome">Pão doce de coco</span><span class="item-pontos"></span><span class="item-preco">R$ 9</span></li>
+                  <li data-foto="cappuccino"><span class="item-nome">Pé de moleque de massa puba <small>fatia</small></span><span class="item-pontos"></span><span class="item-preco">R$ 10</span></li>
+                </ul>
+              </div>
+              <div class="painel" role="tabpanel" id="painel-cafe" aria-labelledby="aba-cafe" tabindex="0" hidden>
+                <ul class="itens">
+                  <li data-foto="espresso"><span class="item-nome">Espresso</span><span class="item-pontos"></span><span class="item-preco">R$ 7</span></li>
+                  <li data-foto="espresso"><span class="item-nome">Cortado</span><span class="item-pontos"></span><span class="item-preco">R$ 9</span></li>
+                  <li data-foto="chaleira"><span class="item-nome">Coado na hora <small>V60, 250 ml</small></span><span class="item-pontos"></span><span class="item-preco">R$ 12</span><span class="item-desc">Grão do Maciço de Baturité, torra média.</span></li>
+                  <li data-foto="cappuccino"><span class="item-nome">Cappuccino</span><span class="item-pontos"></span><span class="item-preco">R$ 13</span></li>
+                  <li data-foto="ia-cafe-vapor"><span class="item-nome">Café com leite e rapadura</span><span class="item-pontos"></span><span class="item-preco">R$ 11</span></li>
+                  <li data-foto="coado"><span class="item-nome">Café gelado com caldo de cana</span><span class="item-pontos"></span><span class="item-preco">R$ 15</span><span class="item-desc">Coado frio por 12 horas, cana moída na hora.</span></li>
+                  <li data-foto="cappuccino"><span class="item-nome">Chocolate quente de cacau baiano</span><span class="item-pontos"></span><span class="item-preco">R$ 14</span></li>
+                  <li data-foto="chaleira"><span class="item-nome">Chá de capim-santo</span><span class="item-pontos"></span><span class="item-preco">R$ 8</span></li>
+                </ul>
+              </div>
+              <div class="painel" role="tabpanel" id="painel-brunch" aria-labelledby="aba-brunch" tabindex="0" hidden>
+                <ul class="itens">
+                  <li data-foto="ia-miolo"><span class="item-nome">Torrada de levain, manteiga da terra e ovo caipira</span><span class="item-pontos"></span><span class="item-preco">R$ 32</span></li>
+                  <li data-foto="pao-de-queijo"><span class="item-nome">Cuscuz da casa com queijo coalho e ovo</span><span class="item-pontos"></span><span class="item-preco">R$ 29</span></li>
+                  <li data-foto="focaccia"><span class="item-nome">Focaccia com coalhada e tomate assado</span><span class="item-pontos"></span><span class="item-preco">R$ 30</span></li>
+                  <li data-foto="pao-de-queijo"><span class="item-nome">Tapioca de coalho e mel de engenho</span><span class="item-pontos"></span><span class="item-preco">R$ 24</span></li>
+                  <li data-foto="bolo"><span class="item-nome">Mesa de bolos <small>3 fatias</small></span><span class="item-pontos"></span><span class="item-preco">R$ 30</span></li>
+                  <li data-foto="croissant-farinha"><span class="item-nome">Prato Sereno <small>para dois</small></span><span class="item-pontos"></span><span class="item-preco">R$ 98</span><span class="item-desc">Pães, manteiga da terra, coalho, doces, frutas e dois cafés.</span></li>
+                </ul>
+                <p class="nota-brunch">Sábado, das 8h às 13h, só com reserva.</p>
+              </div>
             </div>
           </div>
 
           <figure class="cardapio-foto" aria-hidden="true">
             <foto nome="casca" alt="" sizes="(min-width: 900px) 38vw, 92vw"></foto>
+            <figcaption class="cardapio-legenda"><span>Na foto</span><span data-foto-legenda>Pão de fermentação natural</span></figcaption>
           </figure>
+
+          <article class="destaque" aria-labelledby="destaque-titulo">
+            <div class="destaque-foto revela" data-revela>
+              <foto nome="focaccia" alt="Focaccia dourada fatiada sobre a tábua, com ramos de alecrim" sizes="(min-width: 900px) 46vw, 92vw"></foto>
+            </div>
+            <div class="destaque-texto">
+              <p class="destaque-rotulo">Destaque da casa</p>
+              <h3 id="destaque-titulo">Focaccia de queijo coalho e mel de engenho</h3>
+              <p class="destaque-desc">Massa de 36 horas, coalho tostado na pedra e um fio de mel de engenho na saída do forno. Sai às 9h30 e costuma acabar antes das 11h.</p>
+              <dl class="destaque-precos">
+                <div><dt>Fatia</dt><dd>R$ 16</dd></div>
+                <div><dt>Inteira, 8 fatias</dt><dd>R$ 112</dd></div>
+                <div><dt>Fornada</dt><dd>9h30</dd></div>
+              </dl>
+              <a
+                class="btn btn-escuro btn-grande"
+                href="https://wa.me/?text=Oi%2C%20Sereno!%20Quero%20reservar%20uma%20focaccia%20da%20fornada%20das%209h30."
+                target="_blank"
+                rel="noopener"
+                ><i data-icon="whatsapp-logo"></i>Reservar a de amanhã</a
+              >
+            </div>
+          </article>
         </div>
       </section>
 
@@ -344,31 +403,45 @@
         <div class="moldura vizinhos-grade">
           <h2 id="vizinhos-titulo" class="titulo-menor">O que dizem na fila</h2>
           <div class="citacoes" data-citacoes>
-            <figure class="citacao" data-citacao>
-              <blockquote><p>“Acordo com o cheiro do forno. Às 6h01 já estou na fila, e o pão ainda estala dentro do saco.”</p></blockquote>
-              <figcaption>Socorro Alencar, <span>vizinha da rua de cima</span></figcaption>
-            </figure>
-            <figure class="citacao" data-citacao hidden>
-              <blockquote><p>“O quadro de fornadas mudou meu domingo. Saio do pedal sabendo que a focaccia sai às 9h30.”</p></blockquote>
-              <figcaption>Tiago Bezerra, <span>ciclista de domingo</span></figcaption>
-            </figure>
-            <figure class="citacao" data-citacao hidden>
-              <blockquote><p>“O bolo de macaxeira tem o gosto do que minha mãe fazia. A diferença é que não preciso ralar nada.”</p></blockquote>
-              <figcaption>Lúcia Feitosa, <span>cliente da fornada das 6h</span></figcaption>
-            </figure>
+            <div class="citacoes-pilha">
+              <figure class="citacao" data-citacao>
+                <blockquote><p>“Acordo com o cheiro do forno. Às 6h01 já estou na fila, e o pão ainda estala dentro do saco.”</p></blockquote>
+                <figcaption>Socorro Alencar, <span>vizinha da rua de cima</span></figcaption>
+              </figure>
+              <figure class="citacao" data-citacao hidden>
+                <blockquote><p>“O quadro de fornadas mudou meu domingo. Saio do pedal sabendo que a focaccia sai às 9h30.”</p></blockquote>
+                <figcaption>Tiago Bezerra, <span>ciclista de domingo</span></figcaption>
+              </figure>
+              <figure class="citacao" data-citacao hidden>
+                <blockquote><p>“O bolo de macaxeira tem o gosto do que minha mãe fazia. A diferença é que não preciso ralar nada.”</p></blockquote>
+                <figcaption>Lúcia Feitosa, <span>cliente da fornada das 6h</span></figcaption>
+              </figure>
+            </div>
             <div class="citacoes-controles">
               <button type="button" class="seta" data-anterior aria-label="Depoimento anterior"><i data-icon="arrow-left"></i></button>
               <p class="citacoes-contador" aria-live="polite"><span data-atual>1</span> de 3</p>
               <button type="button" class="seta" data-proximo aria-label="Próximo depoimento"><i data-icon="arrow-right"></i></button>
             </div>
           </div>
-          <p class="aviso-ficticio">Depoimentos fictícios, escritos para este projeto conceitual.</p>
+          <aside class="nota" aria-label="Nota média dos clientes">
+            <p class="nota-num"><span data-conta>4,9</span></p>
+            <p class="nota-pontos" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="quase"></i></p>
+            <p class="nota-txt">de 5 nas avaliações do Google</p>
+            <p class="nota-meta">312 avaliações · nota fictícia</p>
+          </aside>
+          <ul class="numeros">
+            <li><span class="numeros-n" data-conta>1.200</span><span>pães por semana, todos com hora marcada</span></li>
+            <li><span class="numeros-n" data-conta>36</span><span>horas de fermentação em cada um deles</span></li>
+            <li><span class="numeros-n">6h</span><span>a primeira fornada, de terça a domingo</span></li>
+            <li><span class="numeros-n" data-conta>0</span><span>pão no lixo: a sobra vai para a cozinha comunitária</span></li>
+          </ul>
+          <p class="aviso-ficticio">Depoimentos e números fictícios, escritos para este projeto conceitual.</p>
         </div>
       </section>
 
       <!-- ============ VISITE ============ -->
       <section class="visite tostado" id="visite" aria-labelledby="visite-titulo">
-        <div class="visite-grade">
+        <div class="moldura visite-grade">
           <div class="visite-texto">
             <h2 id="visite-titulo" class="titulo" data-linhas>Passe na padaria</h2>
             <p class="status-loja" data-status-loja><span class="status-marca"></span><span data-status-texto>Terça a domingo, a partir das 6h</span></p>
@@ -388,14 +461,79 @@
               >
               <a class="link" href="https://wa.me/?text=Oi%2C%20Sereno!%20Quero%20fazer%20um%20pedido." target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
             </div>
+          </div>
+          <div class="visite-foto revela" data-revela>
+            <foto nome="ia-hero-fornada-9x16" alt="Pães de fermentação natural recém-saídos do forno, com vapor e farinha no ar sobre a bancada" sizes="(min-width: 900px) 46vw, 92vw"></foto>
+          </div>
+
+          <figure class="visite-mapa">
+            <svg viewBox="0 0 600 420" role="img" aria-labelledby="mapa-t mapa-d">
+              <title id="mapa-t">Mapa ilustrativo da vizinhança</title>
+              <desc id="mapa-d">A padaria fica na Rua do Sereno, 47, entre a Avenida do Engenho e a Rua da Feira, a três minutos a pé do ponto de ônibus da avenida e a uma quadra da Praça da Feira.</desc>
+              <defs><clipPath id="mapa-recorte"><rect width="600" height="420" rx="2" /></clipPath></defs>
+              <rect class="mapa-fundo" width="600" height="420" rx="2" />
+              <g clip-path="url(#mapa-recorte)">
+                <g transform="rotate(-6 300 210)">
+                  <g class="mapa-quadras">
+                    <rect x="-60" y="-60" width="195" height="160" rx="6" />
+                    <rect x="165" y="-60" width="150" height="160" rx="6" />
+                    <rect x="345" y="-60" width="140" height="160" rx="6" />
+                    <rect x="515" y="-60" width="160" height="160" rx="6" />
+                    <rect x="-60" y="140" width="195" height="135" rx="6" />
+                    <rect x="165" y="140" width="150" height="135" rx="6" />
+                    <rect x="345" y="140" width="140" height="135" rx="6" />
+                    <rect x="515" y="140" width="160" height="135" rx="6" />
+                    <rect x="-60" y="305" width="195" height="180" rx="6" />
+                    <rect x="345" y="305" width="140" height="180" rx="6" />
+                    <rect x="515" y="305" width="160" height="180" rx="6" />
+                  </g>
+                  <rect class="mapa-praca" x="165" y="305" width="150" height="180" rx="6" />
+                  <g class="mapa-arvores">
+                    <circle cx="195" cy="330" r="9" /><circle cx="240" cy="345" r="11" /><circle cx="288" cy="328" r="8" />
+                    <circle cx="205" cy="378" r="10" /><circle cx="270" cy="384" r="9" />
+                  </g>
+                  <rect class="mapa-loja" x="345" y="186" width="58" height="44" rx="3" />
+                  <g class="mapa-nomes">
+                    <text x="60" y="124">AV. DO ENGENHO</text>
+                    <text x="420" y="124">AV. DO ENGENHO</text>
+                    <text x="40" y="294">RUA DA FEIRA</text>
+                    <text x="420" y="294">RUA DA FEIRA</text>
+                    <text transform="translate(334 410) rotate(-90)">RUA DO SERENO</text>
+                    <text class="mapa-sec" transform="translate(154 268) rotate(-90)">R. DAS MANGUEIRAS</text>
+                    <text class="mapa-sec" transform="translate(504 255) rotate(-90)">TRAV. DA FARINHA</text>
+                    <text class="mapa-praca-nome" x="240" y="404">PRAÇA DA FEIRA</text>
+                  </g>
+                  <path class="mapa-rota" d="M222 120 H330 V208" />
+                  <rect class="mapa-onibus" x="212" y="110" width="20" height="20" rx="3" />
+                  <text class="mapa-rota-nome" x="238" y="90">ônibus · 3 min a pé</text>
+                  <circle class="mapa-pino-halo" cx="330" cy="208" r="20" />
+                  <circle class="mapa-pino" cx="330" cy="208" r="9" />
+                  <text class="mapa-loja-nome" x="414" y="206">Sereno</text>
+                  <text class="mapa-loja-num" x="414" y="226">nº 47</text>
+                </g>
+              </g>
+              <g class="mapa-norte" transform="translate(562 40)">
+                <circle r="18" />
+                <path d="M0 -11 L5 5 L0 2 L-5 5 Z" />
+                <text y="-24">N</text>
+              </g>
+            </svg>
+            <figcaption>Mapa ilustrativo, fora de escala. Ruas fictícias.</figcaption>
+          </figure>
+
+          <div class="visite-info">
             <address class="endereco">
               <span class="endereco-rua">Rua do Sereno, 47</span>
               <span>Pimenta, Crato (CE). Endereço fictício.</span>
-              <span>Traga sua sacola de pano: o cafezinho é por nossa conta.</span>
+              <span>A uma quadra da Praça da Feira, com a porta azul.</span>
             </address>
-          </div>
-          <div class="visite-foto revela" data-revela>
-            <foto nome="ia-hero-fornada-9x16" alt="Pães de fermentação natural recém-saídos do forno, com vapor e farinha no ar sobre a bancada" sizes="(min-width: 900px) 50vw, 100vw"></foto>
+            <ul class="extras">
+              <li><i data-icon="car"></i><span><b>Estacionamento</b> Seis vagas na porta e bicicletário coberto.</span></li>
+              <li><i data-icon="pix-logo"></i><span><b>Pagamento</b> Pix, cartão e dinheiro. Vale-refeição também.</span></li>
+              <li><i data-icon="package"></i><span><b>Encomendas</b> Pelo WhatsApp até as 18h da véspera.</span></li>
+              <li><i data-icon="wifi-high"></i><span><b>Para ficar</b> Wi-Fi aberto, 14 lugares e tomada na bancada.</span></li>
+            </ul>
+            <p class="visite-nota">Traga sua sacola de pano: o cafezinho é por nossa conta.</p>
           </div>
         </div>
       </section>

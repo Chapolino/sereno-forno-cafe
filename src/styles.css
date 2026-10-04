@@ -1093,55 +1093,117 @@ summary {
 }
 .nd-abre figcaption {
   display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  gap: 0.6rem clamp(1.5rem, 4vw, 4rem);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0.6rem clamp(1.25rem, 2.4vw, 2.25rem);
   align-items: start;
 }
 .nd-abre h3 {
   font-size: clamp(1.8rem, 1.3rem + 1.8vw, 3rem);
   max-width: 18ch;
 }
+.nd-abre figcaption h3 {
+  grid-column: 1 / span 7;
+}
 .nd-abre figcaption p {
+  grid-column: 9 / -1;
   padding-top: 0.5rem;
 }
-.nd-cafe {
-  grid-column: 1 / span 4;
+/* três colunas iguais: foto · painel · foto, com topo e base batendo (subgrid) */
+.nd-cafe,
+.nd-numero,
+.nd-sobra {
+  grid-column: span 4;
+  grid-row: span 2;
+  display: grid;
+  grid-template-rows: subgrid;
+  row-gap: 1.1rem;
 }
-.nd-cafe .revela img,
-.nd-sobra .revela img {
-  aspect-ratio: 4 / 5;
+/* altura mínima 4:5 pelo padding (aspect-ratio + stretch alargaria a foto além da coluna) */
+.nd-cafe .revela,
+.nd-sobra .revela {
+  align-self: stretch;
+  --prop: 125%;
 }
-.nd-numero {
-  grid-column: 5 / span 4;
-  align-self: center;
-  padding: clamp(1.5rem, 3vw, 2.5rem) 0;
-  border-block: 1px solid rgba(20, 16, 13, 0.18);
+.nd-cafe .revela::before,
+.nd-sobra .revela::before {
+  content: '';
+  display: block;
+  padding-top: var(--prop);
 }
-.nd-frase {
+.nd-cafe .revela picture,
+.nd-sobra .revela picture {
+  position: absolute;
+  inset: 0;
+}
+.nd-painel {
+  align-self: stretch;
+  min-width: 0;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  align-content: start;
+  padding: clamp(1.4rem, 2.4vw, 2.2rem);
+  background: var(--tostado);
+  border-radius: var(--raio);
+}
+.nd .nd-grande {
   font-family: var(--f-display);
-  font-size: clamp(1.9rem, 1.3rem + 1.9vw, 3.1rem);
-  line-height: 1.08;
-  letter-spacing: -0.015em;
-  color: var(--tinta-dia);
-  max-width: 14ch;
-  margin-bottom: 1rem;
-  text-wrap: balance;
-}
-.nd .nd-frase {
-  color: var(--tinta-dia);
-  max-width: 14ch;
-}
-.nd-grande {
-  font-family: var(--f-display);
-  font-size: clamp(5.5rem, 3rem + 7vw, 10rem);
+  font-size: clamp(5rem, 2.6rem + 6vw, 9rem);
   line-height: 0.85;
   letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
-  margin-bottom: 0.8rem;
+  color: var(--tinta-dia);
 }
-.nd-sobra {
-  grid-column: 9 / span 4;
-  margin-top: clamp(0rem, 6vw, 6rem);
+.nd .nd-painel-rot {
+  margin-top: 0.7rem;
+  font-weight: 600;
+  color: var(--tinta-dia);
+}
+.nd-produtores {
+  align-self: end;
+  display: grid;
+  margin-top: 1.4rem;
+  border-top: 1px solid rgba(20, 16, 13, 0.18);
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+.nd-produtores li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 1rem;
+  padding-block: 0.55rem;
+  border-bottom: 1px solid rgba(20, 16, 13, 0.1);
+}
+.nd-produtores span:first-child {
+  font-weight: 600;
+  color: var(--tinta-dia);
+}
+.nd-produtores span + span {
+  grid-column: 1;
+  color: var(--suave-dia);
+}
+.nd-produtores b {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--brasa-funda);
+}
+/* cabeça em duas colunas: título à esquerda, texto à direita, na mesma base */
+.cabeca-dupla {
+  max-width: none;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(1.25rem, 2.4vw, 2.25rem);
+  align-items: end;
+}
+.cabeca-dupla .titulo {
+  grid-column: 1 / span 7;
+}
+.cabeca-dupla .texto {
+  grid-column: 9 / -1;
+  padding-bottom: 0.35rem;
 }
 .vapor {
   position: absolute;
@@ -1165,6 +1227,10 @@ summary {
   .nd-abre figcaption {
     grid-template-columns: 1fr;
   }
+  .nd-abre figcaption h3,
+  .nd-abre figcaption p {
+    grid-column: 1;
+  }
   .nd-abre .revela {
     margin-inline: calc(var(--borda-esq) * -1) calc(var(--borda-dir) * -1);
     border-radius: 0;
@@ -1176,11 +1242,20 @@ summary {
   .nd-numero,
   .nd-sobra {
     grid-column: 1 / -1;
-    margin-top: 0;
+    grid-row: auto;
+    grid-template-rows: auto;
   }
-  .nd-cafe .revela img,
-  .nd-sobra .revela img {
-    aspect-ratio: 4 / 3;
+  .nd-cafe .revela,
+  .nd-sobra .revela {
+    --prop: 75%;
+  }
+  .cabeca-dupla {
+    grid-template-columns: 1fr;
+    row-gap: 1.3rem;
+  }
+  .cabeca-dupla .titulo,
+  .cabeca-dupla .texto {
+    grid-column: 1;
   }
 }
 @media (min-width: 600px) and (max-width: 899px) {
@@ -1190,34 +1265,78 @@ summary {
   .nd-sobra {
     grid-column: 7 / span 6;
   }
-  .nd-cafe .revela img,
-  .nd-sobra .revela img {
-    aspect-ratio: 4 / 5;
+  .nd-numero {
+    order: 3;
+  }
+  .nd-cafe .revela,
+  .nd-sobra .revela {
+    --prop: 125%;
   }
 }
 
 /* ==========================================================================
    CARDÁPIO (dia, papel tostado)
+   Grade de 12: cabeça 7 + como pedir 5 · lista 7 + foto 5 (mesma altura) ·
+   destaque da casa com a foto na largura da lista e o texto na coluna da foto
    ========================================================================== */
 .cardapio {
   padding-block: var(--secao);
 }
-.cardapio-grade {
+.cardapio-grade,
+.destaque,
+.vizinhos-grade,
+.visite-grade {
   display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  gap: clamp(2.5rem, 6vw, 6.5rem);
-  align-items: start;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(1.25rem, 2.4vw, 2.25rem);
 }
-.cardapio-lista {
+.cardapio-grade {
+  row-gap: clamp(2.5rem, 4.5vw, 4rem);
+  align-items: stretch;
+}
+.cardapio-cabeca {
+  grid-column: 1 / span 7;
   display: grid;
   gap: 1.3rem;
+  align-self: end;
+}
+.como-pedir {
+  grid-column: 8 / -1;
+  align-self: end;
+  display: grid;
+  border-top: 1px solid rgba(20, 16, 13, 0.18);
+  counter-reset: passo;
+}
+.como-pedir li {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr);
+  align-items: baseline;
+  padding-block: 0.7rem;
+  border-bottom: 1px solid rgba(20, 16, 13, 0.1);
+  color: var(--suave-dia);
+  line-height: 1.45;
+}
+.como-pedir b {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--brasa-funda);
+}
+.como-pedir strong {
+  font-weight: 600;
+  color: var(--tinta-dia);
+}
+.cardapio-lista {
+  grid-column: 1 / span 7;
+  display: grid;
+  align-content: start;
   min-width: 0;
 }
 .abas {
   position: relative;
   display: flex;
-  gap: clamp(1.25rem, 2.6vw, 2.25rem);
-  margin-top: clamp(1.25rem, 3vw, 2.25rem);
+  gap: clamp(1.4rem, 2.8vw, 2.6rem);
   overflow-x: auto;
   scrollbar-width: none;
   border-bottom: 1px solid rgba(20, 16, 13, 0.18);
@@ -1225,28 +1344,37 @@ summary {
 .abas::-webkit-scrollbar {
   display: none;
 }
-@media (max-width: 520px) {
-  .abas {
-    -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
-    mask-image: linear-gradient(90deg, #000 85%, transparent);
-    padding-right: 2rem;
-  }
-}
 .abas button {
   flex: none;
-  padding: 0.85rem 0;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.3em;
+  padding: 0.7rem 0 0.8rem;
   background: none;
   border: 0;
-  font-weight: 600;
-  font-size: 0.98rem;
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(1.3rem, 1.05rem + 0.75vw, 1.7rem);
+  line-height: 1.1;
   color: var(--suave-dia);
   cursor: pointer;
   white-space: nowrap;
   transition: color 0.2s;
 }
+.aba-n {
+  font-family: var(--f-texto);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  margin-top: 0.15em;
+  font-variant-numeric: tabular-nums;
+}
 .abas button:hover,
 .abas button[aria-selected='true'] {
   color: var(--tinta-dia);
+}
+.abas button[aria-selected='true'] .aba-n {
+  color: var(--brasa-funda);
 }
 .abas-traco {
   position: absolute;
@@ -1260,14 +1388,26 @@ summary {
     transform 0.45s var(--ease),
     width 0.45s var(--ease);
 }
+/* os painéis ocupam a mesma célula: a seção tem sempre a altura do maior (nada pula ao trocar de aba) */
+.paineis {
+  display: grid;
+}
+.painel {
+  grid-area: 1 / 1;
+}
+.painel[hidden] {
+  display: block;
+  visibility: hidden;
+}
 .painel:focus-visible {
   outline-offset: 8px;
 }
 .itens li {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.8rem;
-  padding-block: 1.05rem;
+  column-gap: 0.8rem;
+  padding-block: 0.95rem;
   border-bottom: 1px solid rgba(20, 16, 13, 0.1);
 }
 .item-nome {
@@ -1295,48 +1435,172 @@ summary {
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
+.item-desc {
+  flex-basis: 100%;
+  margin-top: 0.15rem;
+  max-width: 52ch;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--suave-dia);
+}
 @media (hover: hover) {
   .itens li:hover .item-nome {
     transform: translateX(4px);
   }
 }
-
 .nota-brunch {
   margin-top: 1.2rem;
   font-weight: 600;
   color: var(--tinta-dia);
 }
+/* a foto acompanha o item e tem exatamente a altura das abas + lista */
 .cardapio-foto {
-  position: sticky;
-  top: calc(var(--topo-h) + 1.5rem);
+  grid-column: 8 / -1;
+  position: relative;
+  min-height: 420px;
   overflow: hidden;
-  border-radius: 0;
-  /* sangra até a borda direita da tela, como a foto da Visite */
-  margin-right: calc(-1 * ((100vw - min(100vw, var(--largura) + var(--lateral) * 2)) / 2 + var(--borda-dir)));
-  background: var(--casca);
+  border-radius: var(--raio);
+  background: var(--tostado);
 }
+.cardapio-foto picture,
 .cardapio-foto img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  height: 100%;
   object-fit: cover;
+}
+.cardapio-legenda {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  display: grid;
+  gap: 0.15rem;
+  padding: 3.5rem 1.4rem 1.2rem;
+  background: linear-gradient(0deg, rgba(20, 16, 13, 0.78), rgba(20, 16, 13, 0));
+  color: var(--papel);
+  font-weight: 600;
+  line-height: 1.35;
+}
+.cardapio-legenda span:first-child {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--farinha);
+}
+/* destaque da casa */
+.destaque {
+  grid-column: 1 / -1;
+  align-items: stretch;
+  padding-top: clamp(2.5rem, 4.5vw, 4rem);
+  border-top: 1px solid rgba(20, 16, 13, 0.18);
+}
+.destaque-foto {
+  grid-column: 1 / span 7;
+  min-height: 340px;
+}
+.destaque-foto picture {
+  position: absolute;
+  inset: 0;
+}
+.destaque-texto {
+  grid-column: 8 / -1;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 1.15rem;
+  padding-block: 0.5rem;
+}
+.destaque-rotulo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--brasa-funda);
+}
+.destaque-rotulo::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.destaque h3 {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 1.3rem + 1.6vw, 2.9rem);
+  line-height: 1.06;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+.destaque-desc {
+  max-width: 44ch;
+  color: var(--suave-dia);
+}
+.destaque-precos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 0;
+  margin-block: 0.3rem 0.5rem;
+}
+.destaque-precos div {
+  display: grid;
+  gap: 0.15rem;
+  padding-inline: 0 1.4rem;
+  margin-right: 1.4rem;
+  border-right: 1px solid rgba(20, 16, 13, 0.16);
+}
+.destaque-precos div:last-child {
+  border-right: 0;
+  margin-right: 0;
+  padding-right: 0;
+}
+.destaque-precos dt {
+  font-size: 0.82rem;
+  color: var(--suave-dia);
+}
+.destaque-precos dd {
+  font-family: var(--f-display);
+  font-size: 1.9rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 @media (max-width: 899px) {
   .cardapio-grade {
-    grid-template-columns: 1fr;
+    row-gap: 2.5rem;
+  }
+  .cardapio-cabeca,
+  .como-pedir,
+  .cardapio-lista,
+  .cardapio-foto,
+  .destaque-foto,
+  .destaque-texto {
+    grid-column: 1 / -1;
   }
   .cardapio-foto {
-    position: relative;
-    top: auto;
-    order: -1;
-    margin-right: 0;
-  }
-  .cardapio-foto img {
+    order: 1;
+    min-height: 0;
     aspect-ratio: 16 / 10;
+  }
+  .cardapio-lista {
+    order: 2;
+  }
+  .como-pedir {
+    order: 3;
+  }
+  .destaque {
+    order: 4;
+    row-gap: 1.8rem;
+  }
+  .destaque-foto {
+    min-height: 0;
+    aspect-ratio: 3 / 2;
   }
 }
 @media (max-width: 520px) {
   .itens li {
-    flex-wrap: wrap;
     row-gap: 0.1rem;
   }
   .item-nome {
@@ -1351,33 +1615,46 @@ summary {
 }
 
 /* ==========================================================================
-   DEPOIMENTOS (o fim de tarde escurece de novo)
+   DEPOIMENTOS: citação (8) + nota (3) · faixa de números (4 × 3)
    ========================================================================== */
 .vizinhos {
   padding-block: var(--secao);
 }
 .vizinhos-grade {
-  display: grid;
-  gap: clamp(2rem, 4vw, 3rem);
+  row-gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: stretch;
+}
+.vizinhos .titulo-menor {
+  grid-column: 1 / -1;
+  color: var(--suave-dia);
 }
 .citacoes {
+  grid-column: 1 / span 8;
   display: grid;
-  gap: clamp(2rem, 4vw, 3rem);
+  align-content: space-between;
+  gap: clamp(2rem, 3.5vw, 2.75rem);
+}
+/* as três citações ocupam a mesma célula: a altura não muda na troca */
+.citacoes-pilha {
+  display: grid;
 }
 .citacao {
+  grid-area: 1 / 1;
   display: grid;
+  align-content: start;
   gap: 1.6rem;
 }
 .citacao[hidden] {
-  display: none;
+  display: grid;
+  visibility: hidden;
 }
 .citacao blockquote p {
   font-family: var(--f-display);
-  font-size: clamp(2.1rem, 1.1rem + 3.9vw, 5rem);
-  line-height: 1.12;
+  font-size: clamp(2rem, 1rem + 3.4vw, 4.4rem);
+  line-height: 1.1;
   letter-spacing: -0.015em;
-  max-width: 30ch;
-  text-wrap: balance;
+  max-width: none;
+  text-wrap: pretty;
 }
 .citacao figcaption {
   font-weight: 600;
@@ -1418,36 +1695,115 @@ summary {
   text-align: center;
   color: var(--suave-dia);
 }
-.aviso-ficticio {
+.nota {
+  grid-column: 10 / -1;
+  display: grid;
+  align-content: start;
+  gap: 0.5rem;
+  padding-top: 1.3rem;
+  border-top: 1px solid rgba(20, 16, 13, 0.18);
+}
+.nota-num {
+  font-family: var(--f-display);
+  font-size: clamp(5rem, 2.8rem + 5.4vw, 8.5rem);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.nota-pontos {
+  display: flex;
+  gap: 0.45rem;
+  margin-block: 0.6rem 0.3rem;
+}
+.nota-pontos i {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--brasa-funda);
+}
+.nota-pontos i.quase {
+  background: linear-gradient(90deg, var(--brasa-funda) 85%, transparent 85%);
+  box-shadow: inset 0 0 0 1.5px var(--brasa-funda);
+}
+.nota-txt {
+  font-weight: 600;
+  max-width: 18ch;
+}
+.nota-meta {
   font-size: 0.88rem;
   color: var(--suave-dia);
 }
-.vizinhos .titulo-menor {
+.numeros {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: inherit;
+}
+.numeros li {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  padding-top: 1.3rem;
+  border-top: 1px solid rgba(20, 16, 13, 0.18);
+}
+.numeros-n {
+  font-family: var(--f-display);
+  font-size: clamp(2.8rem, 1.9rem + 2.6vw, 4.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.numeros li > span:last-child {
+  max-width: 24ch;
   color: var(--suave-dia);
+}
+.aviso-ficticio {
+  grid-column: 1 / -1;
+  font-size: 0.88rem;
+  color: var(--suave-dia);
+}
+@media (max-width: 899px) {
+  .citacoes,
+  .nota {
+    grid-column: 1 / -1;
+  }
+  .nota {
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 1.5rem;
+    align-items: center;
+  }
+  .nota-num {
+    grid-row: 1 / span 3;
+  }
+  .numeros {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 2rem;
+  }
 }
 
 /* ==========================================================================
-   VISITE (dia)
+   VISITE (dia): duas metades de altura igual em duas linhas
+   texto + horários | foto  ·  mapa ilustrado | endereço + informações
    ========================================================================== */
+.visite {
+  padding-block: var(--secao);
+}
 .visite-grade {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  row-gap: clamp(2.5rem, 4.5vw, 4rem);
   align-items: stretch;
 }
 .visite-texto {
+  grid-column: 1 / span 6;
   display: grid;
-  align-content: center;
-  gap: 1.8rem;
-  padding: var(--secao) clamp(2rem, 5vw, 5rem) var(--secao) var(--borda-esq);
-  max-width: 700px;
-  justify-self: end;
-  width: 100%;
+  align-content: start;
+  gap: 1.7rem;
 }
 .status-loja {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
   font-weight: 600;
+  font-size: 1.05rem;
 }
 .status-marca {
   width: 0.65rem;
@@ -1465,72 +1821,159 @@ summary {
 .horarios div {
   display: grid;
   grid-template-columns: minmax(8rem, 1fr) minmax(0, 1.3fr);
+  align-items: baseline;
   gap: 1rem;
-  padding-block: 0.9rem;
+  padding-block: 1rem;
   border-bottom: 1px solid rgba(20, 16, 13, 0.1);
 }
 .horarios dt {
+  font-size: 1.05rem;
   color: var(--suave-dia);
 }
 .horarios dd {
-  font-weight: 600;
+  font-family: var(--f-display);
+  font-size: clamp(1.45rem, 1.2rem + 0.7vw, 1.9rem);
+  line-height: 1.1;
 }
 .horarios dd small {
   display: block;
-  font-weight: 400;
+  margin-top: 0.25rem;
+  font-family: var(--f-texto);
+  font-size: 0.9rem;
   color: var(--suave-dia);
 }
-.horarios div.hoje dt,
-.horarios div.hoje dd {
+.horarios div.hoje dt {
   color: var(--tinta-dia);
   font-weight: 700;
+}
+.horarios div.hoje dd {
+  color: var(--tinta-dia);
 }
 .visite-acoes {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem 1.75rem;
+  margin-top: 0.3rem;
 }
-.endereco-bloco {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1.25rem 1.5rem;
-  margin-top: 0.5rem;
+.visite-foto {
+  grid-column: 7 / -1;
+  min-height: 420px;
 }
-.placa-rua {
+.visite-foto picture,
+.visite-foto img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.visite-foto img {
+  object-position: 50% 78%;
+}
+.visite-mapa {
+  grid-column: 1 / span 6;
   display: grid;
-  grid-template-columns: auto auto;
-  align-items: end;
-  gap: 0 0.9rem;
-  padding: 0.75rem 1rem 0.8rem;
-  background: var(--noite);
-  color: var(--papel);
-  border-radius: 10px;
-  box-shadow: inset 0 0 0 2px var(--noite), inset 0 0 0 3.5px rgba(237, 228, 214, 0.8);
-  transform-origin: 50% 0;
+  gap: 0.7rem;
+  align-content: start;
 }
-.placa-rua-tipo {
-  grid-column: 1;
-  font-size: 0.75rem;
-  color: var(--farinha);
+.visite-mapa svg {
+  width: 100%;
+  height: auto;
+  border-radius: var(--raio);
 }
-.placa-rua-nome {
-  grid-column: 1;
+.visite-mapa figcaption {
+  font-size: 0.85rem;
+  color: var(--suave-dia);
+}
+.mapa-fundo {
+  fill: var(--papel);
+}
+.mapa-quadras rect {
+  fill: #e6dbc9;
+}
+.mapa-praca {
+  fill: #dfd6c0;
+}
+.mapa-arvores circle {
+  fill: none;
+  stroke: #8f7d63;
+  stroke-width: 1.5;
+}
+.mapa-loja {
+  fill: var(--tinta-dia);
+}
+.mapa-nomes text,
+.mapa-rota-nome {
+  font-family: var(--f-texto);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  fill: #7a6552;
+}
+.mapa-nomes text {
+  text-anchor: start;
+}
+.mapa-praca-nome {
+  text-anchor: middle !important;
+}
+.mapa-rota-nome {
+  letter-spacing: 0.02em;
+  font-size: 12px;
+  fill: var(--brasa-funda);
+}
+.mapa-rota {
+  fill: none;
+  stroke: var(--brasa-funda);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 0.1 7;
+}
+.mapa-onibus {
+  fill: var(--papel);
+  stroke: var(--tinta-dia);
+  stroke-width: 2;
+}
+.mapa-pino {
+  fill: var(--brasa);
+  stroke: var(--tinta-dia);
+  stroke-width: 2;
+}
+.mapa-pino-halo {
+  fill: rgba(217, 119, 74, 0.22);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.mapa-loja-nome {
   font-family: var(--f-display);
-  font-size: 1.7rem;
-  line-height: 1;
+  font-size: 24px;
+  fill: var(--tinta-dia);
 }
-.placa-rua-num {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  align-self: center;
-  font-family: var(--f-display);
-  font-size: 1.5rem;
-  padding: 0.1rem 0.5rem;
-  border-radius: 6px;
-  background: var(--papel);
-  color: var(--noite);
+.mapa-loja-num {
+  font-family: var(--f-texto);
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--suave-dia);
+}
+.mapa-norte circle {
+  fill: none;
+  stroke: rgba(20, 16, 13, 0.35);
+}
+.mapa-norte path {
+  fill: var(--tinta-dia);
+}
+.mapa-norte text {
+  font-family: var(--f-texto);
+  font-size: 11px;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: var(--tinta-dia);
+}
+.visite-info {
+  grid-column: 7 / -1;
+  display: grid;
+  align-content: space-between;
+  gap: 2rem;
 }
 .endereco {
   display: grid;
@@ -1542,34 +1985,56 @@ summary {
 }
 .endereco-rua {
   font-family: var(--f-display);
-  font-size: var(--t-sub);
-  line-height: 1.1;
+  font-size: clamp(2rem, 1.4rem + 1.6vw, 3rem);
+  line-height: 1.05;
   color: var(--tinta-dia);
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.45rem;
 }
-.visite-foto {
-  border-radius: 0;
-  min-height: 420px;
+.extras {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem clamp(1.25rem, 2.4vw, 2.25rem);
 }
-.visite-foto picture,
-.visite-foto img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+.extras li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.8rem;
+  align-items: start;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(20, 16, 13, 0.1);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--suave-dia);
+}
+.extras .ico {
+  width: 1.35rem;
+  height: 1.35rem;
+  color: var(--brasa-funda);
+  margin-top: 0.05rem;
+}
+.extras b {
+  display: block;
+  margin-bottom: 0.15rem;
+  font-weight: 600;
+  color: var(--tinta-dia);
+}
+.visite-nota {
+  font-weight: 600;
+  color: var(--tinta-dia);
 }
 @media (max-width: 899px) {
-  .visite-grade {
-    grid-template-columns: 1fr;
-    min-height: 0;
-  }
-  .visite-texto {
-    padding: var(--secao) var(--borda-dir) 3.5rem var(--borda-esq);
-    max-width: none;
+  .visite-texto,
+  .visite-foto,
+  .visite-mapa,
+  .visite-info {
+    grid-column: 1 / -1;
   }
   .visite-foto {
     min-height: 0;
     aspect-ratio: 4 / 3;
+  }
+  .visite-mapa {
+    order: 2;
   }
 }
 
@@ -1867,20 +2332,21 @@ summary {
 .processo-pino {
   overflow: clip;
 }
+/* só no desktop (pino de 100svh). Elipse que some antes de qualquer borda da camada:
+   nenhum lado reto aparece, em nenhuma posição da varredura */
 .processo-luz {
   position: absolute;
-  inset: 0 -30%;
+  inset: -20% -30%;
   z-index: 3;
   pointer-events: none;
   opacity: 0;
   mix-blend-mode: screen;
-  background: linear-gradient(
-    100deg,
-    rgba(255, 184, 120, 0) 25%,
-    rgba(255, 184, 120, 0.2) 42%,
-    rgba(255, 226, 190, 0.3) 50%,
-    rgba(255, 184, 120, 0.2) 58%,
-    rgba(255, 184, 120, 0) 75%
+  background: radial-gradient(
+    ellipse 18% 46% at 50% 50%,
+    rgba(255, 226, 190, 0.3) 0%,
+    rgba(255, 184, 120, 0.2) 40%,
+    rgba(255, 184, 120, 0.07) 72%,
+    rgba(255, 184, 120, 0) 100%
   );
 }
 .processo-farinha {
@@ -2102,6 +2568,9 @@ summary {
   .lamparina::after {
     animation: chama 3.4s ease-in-out infinite;
   }
+  .mapa-pino-halo {
+    animation: halo 2.8s ease-out infinite;
+  }
   .topo-nav a:hover::before,
   .link:hover::before {
     animation: faisca 0.9s var(--ease) forwards;
@@ -2143,6 +2612,17 @@ summary {
   70% {
     opacity: 0.9;
     transform: scale(1.15);
+  }
+}
+@keyframes halo {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.5);
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: scale(1.7);
   }
 }
 @keyframes brasa-luz {
@@ -2275,10 +2755,18 @@ summary {
     margin-inline: auto;
   }
 
-  /* cardápio: título e abas no centro; as abas quebram em duas linhas em vez de cortar */
-  .cardapio-lista > .titulo,
-  .cardapio-lista > .texto {
-    justify-self: center;
+  .nd-painel {
+    justify-items: center;
+  }
+  .nd-produtores {
+    justify-self: stretch;
+    width: 100%;
+    text-align: left;
+  }
+
+  /* cardápio: cabeça e abas no centro; as abas quebram em duas linhas em vez de cortar */
+  .cardapio-cabeca {
+    justify-items: center;
     text-align: center;
   }
   .abas {
@@ -2287,12 +2775,37 @@ summary {
     column-gap: 1.35rem;
     row-gap: 0;
     overflow: visible;
-    -webkit-mask-image: none;
-    mask-image: none;
-    padding-right: 0;
+  }
+  .abas button {
+    font-size: 1.3rem;
   }
   .nota-brunch {
     text-align: center;
+  }
+  .como-pedir li {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 0.35rem;
+    padding-block: 1rem;
+  }
+  .destaque-texto {
+    justify-items: center;
+    text-align: center;
+  }
+  .destaque-precos {
+    justify-content: center;
+  }
+  .destaque-precos div {
+    padding-inline: 0.9rem;
+    margin-right: 0;
+  }
+  .destaque-precos div:last-child {
+    padding-right: 0.9rem;
+  }
+  .destaque-texto .btn-grande {
+    justify-self: stretch;
+    justify-content: center;
   }
 
   /* depoimentos */
@@ -2307,6 +2820,18 @@ summary {
   }
   .citacoes-controles {
     justify-content: center;
+  }
+  .nota {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .nota-num {
+    grid-row: auto;
+  }
+  .numeros li {
+    justify-items: center;
+    text-align: center;
   }
 
   /* visite */
@@ -2333,12 +2858,44 @@ summary {
     align-self: center;
   }
   .endereco {
-    justify-self: stretch;
     justify-items: center;
     text-align: center;
   }
   .endereco-rua {
     justify-self: center;
+  }
+  .extras {
+    grid-template-columns: 1fr;
+  }
+  .extras li {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  .visite-nota,
+  .visite-mapa figcaption {
+    text-align: center;
+  }
+  .nd-painel {
+    justify-self: stretch;
+  }
+  /* mapa: letras maiores na tela estreita; as duas ruas secundárias saem para não encavalar */
+  .mapa-nomes text {
+    font-size: 14px;
+    letter-spacing: 0.06em;
+  }
+  .mapa-nomes .mapa-sec {
+    display: none;
+  }
+  .mapa-rota-nome {
+    font-size: 17px;
+  }
+  .mapa-loja-nome {
+    font-size: 32px;
+  }
+  .mapa-loja-num {
+    font-size: 16px;
   }
 
   /* rodapé */

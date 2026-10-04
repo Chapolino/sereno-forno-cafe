@@ -134,7 +134,7 @@ Paleta tirada da própria comida e do forno: café, casca, farinha e brasa.
 
 ## Layout
 
-Grade de 12 colunas dentro de 1320 px, com respiro lateral `clamp(18px, 4.2vw, 64px)` somado à área segura do celular. Seções com 6–11rem de respiro vertical. Composições assimétricas: quadro 4/7, cardápio 7/5, visite meio a meio com a foto sangrando. O hero ocupa a tela inteira, com o título ancorado embaixo à esquerda e o relógio no alto à direita (no celular, no alto à esquerda). Abaixo de 900 px tudo vira uma coluna; o processo perde o pino e amanhece no próprio rolar.
+Grade de 12 colunas dentro de 1320 px, com respiro lateral `clamp(18px, 4.2vw, 64px)` somado à área segura do celular. Seções com 6–11rem de respiro vertical. Composições na grade: quadro 4/7; Nordeste em três colunas iguais (subgrid, topo e base batendo); cardápio 7/5 com a foto da altura da lista e o destaque da casa invertido; depoimentos 8 + 3 com faixa de números 4 × 3; visite em duas linhas de metades iguais (texto | foto, mapa | informações). Vazio só como respiro: toda imagem alinha com o conteúdo ao lado ou sangra de ponta a ponta. O hero ocupa a tela inteira, com o título ancorado embaixo à esquerda e o relógio no alto à direita (no celular, no alto à esquerda). Abaixo de 900 px tudo vira uma coluna; o processo perde o pino e amanhece no próprio rolar.
 
 ## Elevation & Depth
 
@@ -151,7 +151,8 @@ Raio de 2 px em botões e fotos, 0 nas fotos que sangram até a borda e círculo
 - **Link:** sublinhado de 1 px que recolhe no hover e muda para brasa funda.
 - **Menu:** transparente sobre o degradê do topo do hero; a partir de 40 px de rolagem fica café-preto com desfoque, o CTA vira brasa sólida e o menu some ao descer e volta ao subir.
 - **Quadro de fornadas:** linhas com horário em Caslon (rola numa máscara ao entrar), nome, estado por forma (cheio = saiu, meio = no forno, contorno = mais tarde) mais texto, e "Me avise" em botão de borda. A régua "agora" é um fio brasa.
-- **Abas do cardápio:** texto Figtree 600 com um traço brasa funda que desliza até a aba ativa.
+- **Abas do cardápio:** Caslon 1.3–1.7rem com a contagem de itens em Figtree pequena; um traço desliza até a aba ativa.
+- **Efeitos de luz:** nenhuma camada pode mostrar borda reta; varreduras e bafos usam degradês que somem antes da borda da camada (elipse) ou ficam recortados pela própria foto.
 
 ## Do's and Don'ts
 

@@ -540,10 +540,6 @@ function processo(mm) {
   const etapas = $$('.etapa', trilho);
   const horas = etapas.map((e) => Number(e.dataset.hora));
 
-  const luz = document.createElement('div');
-  luz.className = 'processo-luz';
-  luz.setAttribute('aria-hidden', 'true');
-  pino.append(luz);
   let farinha = null;
   const iniciarFarinha = (qtd) =>
     quandoOcioso(async () => {
@@ -572,6 +568,12 @@ function processo(mm) {
   mm.add('(min-width: 900px) and (prefers-reduced-motion: no-preference)', () => {
     const distancia = () => Math.max(0, trilho.scrollWidth - (pino.clientWidth - cabeca.offsetWidth));
     gsap.set(secao, NOITE);
+    // varredura de luz do amanhecer: só aqui, com o pino de 100svh (no celular ela atravessava a seção inteira
+    // como uma faixa de bordas retas; lá o amanhecer é só a troca de cor do fundo)
+    const luz = document.createElement('div');
+    luz.className = 'processo-luz';
+    luz.setAttribute('aria-hidden', 'true');
+    pino.append(luz);
     const brasa = document.createElement('i');
     brasa.className = 'processo-brasa';
     linha.append(brasa);
@@ -641,6 +643,7 @@ function processo(mm) {
     return () => {
       gsap.set(secao, { clearProps: '--fundo,--tinta,--suave' });
       brasa.remove();
+      luz.remove();
     };
   });
 
@@ -650,8 +653,6 @@ function processo(mm) {
       .timeline({ scrollTrigger: { trigger: secao, start: '40% 75%', end: '85% 60%', scrub: true } })
       .fromTo(secao, NOITE, { ...AURORA, duration: 0.7, ease: 'none' })
       .to(secao, { ...DIA, duration: 0.3, ease: 'power1.inOut' })
-      .fromTo(luz, { xPercent: -110, opacity: 0 }, { xPercent: 110, duration: 1, ease: 'power1.inOut' }, 0)
-      .to(luz, { keyframes: { opacity: [0, 1, 1, 0] }, duration: 1, ease: 'none' }, 0)
       .to(estado, { dia: 1, duration: 0.3, ease: 'none', onUpdate: () => farinha?.amanhecer(estado.dia) }, 0.7);
     let yAntes = null;
     ScrollTrigger.create({
@@ -703,13 +704,14 @@ function nordeste() {
     end: 'bottom top',
     onToggle: (st) => (st.isActive ? vapor.play() : vapor.pause()),
   });
-  gsap.from('.nd-numero > p:not(.nd-frase)', {
-    opacity: 0,
-    y: 16,
-    duration: 1,
-    ease: ENTRA,
-    scrollTrigger: { trigger: '.nd-numero', start: 'top 80%', once: true },
-  });
+  // o 8 conta como registradora e os produtores entram em cascata, com a distância por último
+  const oito = $('.nd-grande');
+  gsap
+    .timeline({ scrollTrigger: { trigger: '.nd-painel', start: 'top 80%', once: true } })
+    .add(() => rolar(oito, '8', { de: '0', voltas: 1, dur: 1.1, ease: 'power3.inOut', limpar: true }), 0)
+    .from('.nd-painel-rot', { opacity: 0, y: 12, duration: 0.9, ease: ENTRA }, 0.2)
+    .from('.nd-produtores li', { opacity: 0, y: 14, duration: 0.9, stagger: 0.07, ease: ENTRA }, 0.3)
+    .from('.nd-produtores b', { opacity: 0, x: 10, duration: 0.8, stagger: 0.07, ease: ENTRA }, 0.6);
   $$('.nd figcaption').forEach((f) =>
     gsap.from(f.children, { opacity: 0, y: 18, duration: 1, stagger: 0.1, ease: ENTRA, scrollTrigger: { trigger: f, start: 'top 92%', once: true } }),
   );
@@ -726,6 +728,8 @@ function cardapio() {
   const moldura = $('.cardapio-foto');
   const picture = $('picture', moldura);
   let fotoAtual = 'casca';
+  const legenda = $('[data-foto-legenda]');
+  const nomeDo = (li) => $('.item-nome', li).firstChild.textContent.trim();
   let troca = null;
   let porta = null;
   if (!semMovimento()) {
@@ -736,7 +740,8 @@ function cardapio() {
   }
 
   const srcset = (nome, ext) => [480, 800, 1200, 1600, 2400].map((w) => `/img/${nome}-${w}.${ext} ${w}w`).join(', ');
-  const aplicar = (nome) => {
+  const aplicar = (nome, li) => {
+    if (li) legenda.textContent = nomeDo(li);
     $('source[type="image/avif"]', picture).srcset = srcset(nome, 'avif');
     $('source[type="image/webp"]', picture).srcset = srcset(nome, 'webp');
     $('img', picture).src = `/img/${nome}-1200.webp`;
@@ -745,10 +750,12 @@ function cardapio() {
     const i = new Image();
     i.src = `/img/${nome}-800.webp`;
   };
-  function trocarFoto(nome) {
-    if (!nome || nome === fotoAtual) return;
+  function trocarFoto(li) {
+    const nome = li?.dataset.foto;
+    if (!nome) return;
+    if (nome === fotoAtual) return void (legenda.textContent = nomeDo(li));
     fotoAtual = nome;
-    if (semMovimento()) return aplicar(nome);
+    if (semMovimento()) return aplicar(nome, li);
     if (troca) troca.kill();
     const img = $('img', picture);
     // a porta de enrolar desce, troca a foto e sobe de novo
@@ -756,7 +763,7 @@ function cardapio() {
       .timeline()
       .to(porta, { yPercent: 0, duration: 0.28, ease: 'power3.in' })
       .add(() => {
-        aplicar(nome);
+        aplicar(nome, li);
         const tl = troca;
         tl.pause();
         Promise.race([img.decode().catch(() => {}), new Promise((r) => setTimeout(r, 450))]).then(() => tl.resume());
@@ -794,7 +801,7 @@ function cardapio() {
     $$('li.ativo').forEach((li) => li.classList.remove('ativo'));
     if (lis[0]) {
       lis[0].classList.add('ativo');
-      trocarFoto(lis[0].dataset.foto);
+      trocarFoto(lis[0]);
     }
     if (!semMovimento()) {
       gsap.fromTo(lis, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.05, ease: ENTRA, overwrite: true });
@@ -815,7 +822,7 @@ function cardapio() {
     const ativar = () => {
       $$('li.ativo').forEach((x) => x.classList.remove('ativo'));
       li.classList.add('ativo');
-      trocarFoto(li.dataset.foto);
+      trocarFoto(li);
     };
     li.addEventListener('pointerenter', (e) => {
       if (e.pointerType !== 'mouse') return;
@@ -929,6 +936,18 @@ function citacoes() {
     x0 = null;
   });
   if (!semMovimento()) {
+    const contas = $('.vizinhos [data-conta]');
+    ScrollTrigger.create({
+      trigger: '.numeros',
+      start: 'top 88%',
+      once: true,
+      onEnter: () =>
+        contas.forEach((el, k) => {
+          const final = el.textContent.trim();
+          if (/[1-9]/.test(final)) gsap.delayedCall(k * 0.12, () => rolar(el, final, { de: final.replace(/\d/g, '0'), dur: 1, stagger: 0.07, limpar: true }));
+        }),
+    });
+    gsap.from('.nota-pontos i', { scale: 0, duration: 0.6, stagger: 0.08, ease: MECANICA, scrollTrigger: { trigger: '.nota', start: 'top 85%', once: true } });
     const sp = SplitText.create($('blockquote p', caixas[0]), { type: 'lines', mask: 'lines', aria: 'none' });
     gsap.from(sp.lines, {
       yPercent: 108,
@@ -950,6 +969,11 @@ function visiteERodape() {
     .timeline({ scrollTrigger: { trigger: '.horarios', start: 'top 82%', once: true } })
     .from('.horarios > div', { opacity: 0, y: 14, duration: 0.9, stagger: 0.08, ease: ENTRA }, 0)
     .fromTo('.horarios > div.hoje', { '--fio': 0 }, { '--fio': 1, duration: 1.2, ease: 'power3.inOut' }, 0.4);
+  gsap
+    .timeline({ scrollTrigger: { trigger: '.visite-mapa', start: 'top 80%', once: true } })
+    .from('.mapa-pino', { y: -46, duration: 0.9, ease: 'bounce.out' }, 0)
+    .from('.mapa-rota', { opacity: 0, duration: 0.8 }, 0.4)
+    .from('.extras li', { opacity: 0, y: 14, duration: 0.9, stagger: 0.08, ease: ENTRA }, 0.2);
   gsap.from('.status-loja', { opacity: 0, x: -12, duration: 0.9, ease: ENTRA, scrollTrigger: { trigger: '.status-loja', start: 'top 88%', once: true } });
   // a placa do endereço é pendurada e balança até parar (mola)
   gsap
